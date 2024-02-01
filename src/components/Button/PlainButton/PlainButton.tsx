@@ -72,7 +72,7 @@ const secondary = css`
   color: black;
 
   &:hover {
-    background-color: #f1effd;
+    background-color: #ffffff;
   }
 `;
 
