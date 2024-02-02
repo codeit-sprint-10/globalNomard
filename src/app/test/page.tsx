@@ -26,6 +26,8 @@ function page() {
       <Button.Plain style="secondary" roundSize="XL">
         <TextLayout>문화예술</TextLayout>
       </Button.Plain>
+
+      <Button.Arrow />
     </StyledContainer>
   );
 }

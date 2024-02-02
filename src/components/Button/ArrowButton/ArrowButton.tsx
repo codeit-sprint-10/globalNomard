@@ -1,5 +1,9 @@
-import React from 'react';
+import ArrowLeft from '@/assets/icons/Arrow_left.svg';
 
-export default function ArrowButton() {
-  return <div>ArrowButton</div>;
+export function ArrowButton() {
+  return (
+    <div>
+      <ArrowLeft />
+    </div>
+  );
 }
