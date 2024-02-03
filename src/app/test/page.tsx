@@ -27,7 +27,11 @@ function page() {
         <TextLayout>문화예술</TextLayout>
       </Button.Plain>
 
-      <Button.Arrow />
+      <Button.Arrow type="left" isNotActive={true} />
+      <Button.Arrow type="right" />
+
+      <Button.Add type="plus" />
+      <Button.Add type="minus" />
     </StyledContainer>
   );
 }
