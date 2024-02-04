@@ -25,7 +25,7 @@ export const Input = styled.input<StyledComponentProps>`
   align-items: flex-start;
   gap: 10px;
   align-self: stretch;
-  width: 35rem;
+  width: 100%;
 
   border-radius: 6px;
   border: 1px solid ${(props) => (props.isError ? 'red' : '#79747e')};
