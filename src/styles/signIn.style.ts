@@ -7,6 +7,15 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 744px) {
+    width: 100%;
+    padding: 0 5.5rem;
+  }
+
+  @media (max-width: 375px) {
+    width: 35rem;
+  }
 `;
 
 export const Logo = styled.img`
