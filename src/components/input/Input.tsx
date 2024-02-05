@@ -1,55 +1,50 @@
-import React, { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as S from './Input.style';
 
-interface Ptype {
+interface Props {
   title: string;
   type?: Type;
   placeholder: string;
 }
 
+type Inputs = {
+  email: string;
+  password: string;
+};
+
 type Type = 'email' | 'password';
 
-export default function Input({ title, type = 'email', placeholder }: Ptype) {
-  const [isError, setIsError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+export default function Input({ title, type = 'email', placeholder }: Props) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({ mode: 'onChange' });
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (type === 'email') {
-      const InputValue = e.target.value;
-      const EmailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-      if (InputValue === '') {
-        setErrorMsg('');
-        setIsError(false);
-      } else if (!EmailRegex.test(InputValue)) {
-        setErrorMsg('이메일 형식으로 작성해주세요.');
-        setIsError(true);
-      } else {
-        setErrorMsg('');
-        setIsError(false);
-        // email 저장 필요
-      }
-    } else {
-      const InputValue = e.target.value;
-      const PwRegex = /^[0-9a-zA-Z]{8,100}$/;
-      if (InputValue === '') {
-        setErrorMsg('');
-        setIsError(false);
-      } else if (!PwRegex.test(InputValue)) {
-        setErrorMsg('8자 이상 입력해 주세요.');
-        setIsError(true);
-      } else {
-        setErrorMsg('');
-        setIsError(false);
-        // pw 저장 필요
-      }
-    }
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const pwRegex = /^[0-9a-zA-Z]{8,100}$/;
+
+  const validationPattern = type === 'email' ? emailRegex : pwRegex;
+
+  const errorMessages = {
+    email: '이메일 형식으로 작성해주세요.',
+    password: '8자 이상 입력해 주세요.',
   };
 
   return (
-    <S.Wrapper>
-      <S.Title>{title}</S.Title>
-      <S.Input type={type} placeholder={placeholder} onChange={onChangeInput} isError={isError} />
-      {isError && <S.Error>{errorMsg}</S.Error>}
-    </S.Wrapper>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <S.Wrapper>
+        <S.Title>{title}</S.Title>
+        <S.Input
+          {...register(type, { required: true, pattern: validationPattern })}
+          type={type}
+          placeholder={placeholder}
+          $isError={!!errors[type]}
+        />
+        {errors[type] && <S.Error>{errorMessages[type]}</S.Error>}
+      </S.Wrapper>
+    </form>
   );
 }

@@ -16,7 +16,7 @@ export const Title = styled.div`
 `;
 
 interface StyledComponentProps {
-  isError: boolean;
+  $isError: boolean;
 }
 
 export const Input = styled.input<StyledComponentProps>`
@@ -28,7 +28,7 @@ export const Input = styled.input<StyledComponentProps>`
   width: 100%;
 
   border-radius: 6px;
-  border: 1px solid ${(props) => (props.isError ? 'red' : '#79747e')};
+  border: 1px solid ${(props) => (props.$isError ? 'red' : '#79747e')};
   background: var(--white-white_FFFFFF, #fff);
 `;
 
