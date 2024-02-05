@@ -1,11 +1,13 @@
 'use client';
 
+import Button from '@/components/Button/Button';
+import SideMenu from '@/components/SideMenu/SideMenu';
 import { styled } from 'styled-components';
 
 function page() {
   return (
     <StyledContainer>
-      <div>테스트 페이지</div>
+      <SideMenu />
     </StyledContainer>
   );
 }
@@ -17,7 +19,6 @@ const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 30px;
-  border: 1px solid black;
   padding: 20px;
   gap: 30px;
 `;
