@@ -8,8 +8,17 @@ const nextConfig = {
       issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     });
+
+    config.module.rules.push({
+      test: /\.(woff|woff2)$/,
+      use: {
+        loader: 'file-loader',
+      },
+    });
+
     return config;
   },
+
   compiler: {
     styledComponents: true,
   },
@@ -24,25 +33,6 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-  },
-};
-
-module.exports = {
-  ...nextConfig,
-  webpack: (config, { isServer }) => {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
-    config.module.rules.push({
-      test: /\.(woff|woff2)$/,
-      use: {
-        loader: 'file-loader',
-      },
-    });
-
-    return config;
   },
 };
 
