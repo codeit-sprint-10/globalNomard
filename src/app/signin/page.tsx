@@ -1,13 +1,31 @@
 'use client';
 import { PlainButton } from '@/components/Button/PlainButton/PlainButton';
 import Input from '@/components/input/Input';
-// import IMAGES from '@/assets/images';
+import IMAGES from '../../../public/images';
 import * as S from '@/styles/sign.style';
+import Image from 'next/image';
+import Test from '@/components/input/Test';
+import { useForm } from 'react-hook-form';
 
-function page() {
+function Page() {
+  const { control, handleSubmit } = useForm({ mode: 'onChange' });
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
+
   return (
     <S.Wrapper>
-      {/* <S.Logo src={IMAGES.logo} alt="logo" /> */}
+      <Image src={IMAGES.logo} alt="logo" />
+      <form onSubmit={onSubmit}>
+        <Test
+          label="Example"
+          name="email"
+          type="email"
+          control={control}
+          rules={{ required: 'This field is required' }}
+        />
+      </form>
       <Input title="이메일" type="email" placeholder="이메일을 입력해 주세요" />
       <Input title="비밀번호" type="email" placeholder="비밀번호를 입력해 주세요" />
       <PlainButton style="primary" height="4.8rem" roundSize="M">
@@ -20,4 +38,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

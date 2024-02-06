@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -18,7 +19,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Logo = styled.img`
+export const Logo = styled(Image)`
   width: 34rem;
   height: 19.2rem;
 `;
