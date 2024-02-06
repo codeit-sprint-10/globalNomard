@@ -1,4 +1,4 @@
-import Profile from '../Profile/Profile';
+import Profile from '@/_components/Profile/Profile';
 import Menu from './Menu/Menu';
 import * as S from './SideMenu.style';
 

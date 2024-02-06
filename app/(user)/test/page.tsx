@@ -1,8 +1,7 @@
 'use client';
 
-import Button from '@/components/Button/Button';
-import SideMenu from '@/components/SideMenu/SideMenu';
 import { styled } from 'styled-components';
+import SideMenu from '../_components/SideMenu/SideMenu';
 
 function page() {
   return (

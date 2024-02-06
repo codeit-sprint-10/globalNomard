@@ -1,8 +1,8 @@
 'use client';
-import { PlainButton } from '@/components/Button/PlainButton/PlainButton';
-import Input from '@/components/input/Input';
+import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
+import Input from '../_components/input/Input';
 // import IMAGES from '@/assets/images';
-import * as S from '@/styles/sign.style';
+import * as S from '@/_styles/sign.style';
 
 function page() {
   return (
