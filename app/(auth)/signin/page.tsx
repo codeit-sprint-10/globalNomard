@@ -1,10 +1,10 @@
 'use client';
-import { PlainButton } from '@/components/Button/PlainButton/PlainButton';
-import Input from '@/components/input/Input';
-import IMAGES from '../../../public/images';
-import * as S from '@/styles/sign.style';
+import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
+import Input from '../_components/input/Input';
+import IMAGES from '@/public/images';
+import * as S from '@/_styles/sign.style';
 import Image from 'next/image';
-import Test from '@/components/input/Test';
+import Test from '../_components/input/Test';
 import { useForm } from 'react-hook-form';
 
 function Page() {
