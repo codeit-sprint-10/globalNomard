@@ -3,8 +3,8 @@ import * as S from './PlainButton.style';
 
 export interface BaseProps {
   style?: 'primary' | 'secondary';
-  width?: String;
-  height?: String;
+  width?: string;
+  height?: string;
   roundSize: 'XL' | 'L' | 'M' | 'S';
   isNotActive?: boolean;
   children?: ReactNode;

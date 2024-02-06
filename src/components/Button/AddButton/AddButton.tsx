@@ -8,7 +8,7 @@ interface Props {
 
 export function AddButton({ type, onClick }: Props) {
   return (
-    <S.StyleAddButton $type={type}>
+    <S.StyleAddButton $type={type} onClick={onClick}>
       {type === 'plus' && <BtnPlus />}
       {type === 'minus' && <BtnMinus />}
     </S.StyleAddButton>
