@@ -1,67 +1,77 @@
+'use client';
 import { createGlobalStyle } from 'styled-components';
-import OpenSansSemiBoldFontSrc from '@/assets/fonts/OpenSans-SemiBold.ttf';
-import OpenSansBoldFontSrc from '@/assets/fonts/OpenSans-Bold.ttf';
-import PretendardRegularFontSrc from '@/assets/fonts/Pretendard-Regular.woff2';
-import PretendardMediumFontSrc from '@/assets/fonts/Pretendard-Medium.woff2';
-import PretendardSemiBoldFontSrc from '@/assets/fonts/Pretendard-SemiBold.woff2';
-import PretendardBoldFontSrc from '@/assets/fonts/Pretendard-Bold.woff2';
-import SpoqaHanSansNeoRegularFontSrc from '@/assets/fonts/SpoqaHanSansNeo-Regular.woff2';
-import SpoqaHanSansNeoBoldFontSrc from '@/assets/fonts/SpoqaHanSansNeo-Bold.woff2';
+
+const OpenSansSemiBoldFontSrc = './fonts/OpenSans-SemiBold.ttf';
+const OpenSansBoldFontSrc = './fonts/OpenSans-Bold.ttf';
+const PretendardRegularFontSrc = './fonts/Pretendard-Regular.woff2';
+const PretendardMediumFontSrc = './fonts/Pretendard-Medium.woff2';
+const PretendardSemiBoldFontSrc = './fonts/Pretendard-SemiBold.woff2';
+const PretendardBoldFontSrc = './fonts/Pretendard-Bold.woff2';
+const SpoqaHanSansNeoRegularFontSrc = './fonts/SpoqaHanSansNeo-Regular.woff2';
+const SpoqaHanSansNeoBoldFontSrc = './fonts/SpoqaHanSansNeo-Bold.woff2';
 
 const FontStyles = createGlobalStyle`
   @font-face {
-    font-family: 'OpenSans-SemiBold';
+    font-family: 'OpenSans';
     font-weight: 600;
-    src: url(${OpenSansSemiBoldFontSrc}) format('truetype');
     font-display: swap;
+    src: local('OpenSans-SemiBold'),
+      url(${OpenSansSemiBoldFontSrc}) format('truetype');
   }
 
   @font-face {
-    font-family: 'OpenSans-Bold';
+    font-family: 'OpenSans';
     font-weight: 700;
-    src: url(${OpenSansBoldFontSrc}) format('truetype');
+    src: local('OpenSans-Bold'),
+      url(${OpenSansBoldFontSrc}) format('truetype');
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'SpoqaHanSansNeo-Regular';
+    font-family: 'Spoqa Han Sans Neo';
     font-weight: 400;
-    src: url(${SpoqaHanSansNeoRegularFontSrc}) format('woff2');
+    src: local('SpoqaHanSansNeo-Regular'),
+      url(${SpoqaHanSansNeoRegularFontSrc}) format('woff2');
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'SpoqaHanSansNeo-Bold';
+    font-family: 'Spoqa Han Sans Neo';
     font-weight: 700;
-      src: url(${SpoqaHanSansNeoBoldFontSrc}) format('woff2');
+    src: local('SpoqaHanSansNeo-Bold'),
+      url(${SpoqaHanSansNeoBoldFontSrc}) format('woff2');
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Pretendard-Regular';
+    font-family: 'Pretendard';
     font-weight: 400;
-    src: url(${PretendardRegularFontSrc}) format('woff2');
+    src: local('Pretendard-Regular'),
+      url(${PretendardRegularFontSrc}) format('woff2');
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Pretendard-Medium';
+    font-family: 'Pretendard';
     font-weight: 500;
-    src: url(${PretendardMediumFontSrc}) format('woff2');
+    src: local('Pretendard-Medium'),
+      url(${PretendardMediumFontSrc}) format('woff2');
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Pretendard-SemiBold';
+    font-family: 'Pretendard';
     font-weight: 600;
-    src: url(${PretendardSemiBoldFontSrc}) format('woff2');
+    src: local('Pretendard-SemiBold'),
+      url(${PretendardSemiBoldFontSrc}) format('woff2');
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Pretendard-Bold';
+    font-family: 'Pretendard';
     font-weight: 700;
-    src: url(${PretendardBoldFontSrc}) format('woff2');
+    src: local('Pretendard-Bold'),
+      url(${PretendardBoldFontSrc}) format('woff2');
     font-display: swap;
   }
 

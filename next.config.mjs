@@ -8,17 +8,8 @@ const nextConfig = {
       issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     });
-
-    config.module.rules.push({
-      test: /\.(woff|woff2)$/,
-      use: {
-        loader: 'file-loader',
-      },
-    });
-
     return config;
   },
-
   compiler: {
     styledComponents: true,
   },
