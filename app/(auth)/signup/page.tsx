@@ -1,21 +1,19 @@
 /* eslint-disable prettier/prettier */
 'use client';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
-import Input from '../_components/input/Input';
-import IMAGES from '@/public/images';
-import * as S from '@/_styles/sign.style';
+import Input from '../../_components/input/Input';
+import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
 
 function Page() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    console.log(data.password);
   });
 
   return (
     <S.Wrapper>
-      <S.Logo src={IMAGES.logo} alt="logo" />
       <S.Form onSubmit={onSubmit}>
         <Input
           title="이메일"
@@ -50,7 +48,12 @@ function Page() {
           rules={{ required: 'This field is required' }}
         />
       </S.Form>
-      <PlainButton style="primary" height="4.8rem" roundSize="M">
+      <PlainButton
+        onClick={onSubmit}
+        style="primary"
+        height="4.8rem"
+        roundSize="M"
+      >
         로그인 하기
       </PlainButton>
       <S.Info>

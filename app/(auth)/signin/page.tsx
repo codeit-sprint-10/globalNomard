@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 'use client';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
-import Input from '../_components/input/Input';
-import IMAGES from '@/public/images';
-import * as S from '@/_styles/sign.style';
+import Input from '../../_components/input/Input';
+import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
 
 function Page() {
@@ -15,7 +14,6 @@ function Page() {
 
   return (
     <S.Wrapper>
-      <S.Logo src={IMAGES.logo} alt="logo" />
       <S.Form onSubmit={onSubmit}>
         <Input
           title="이메일"

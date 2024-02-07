@@ -46,8 +46,6 @@ export default function Input({
     rules: { pattern: rule },
   });
 
-  console.log(formState.errors);
-
   return (
     <S.Wrapper>
       <S.Title>{title}</S.Title>
