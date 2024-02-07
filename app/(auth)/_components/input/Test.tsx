@@ -1,32 +1,44 @@
+/* eslint-disable prettier/prettier */
 import { useController, UseControllerProps } from 'react-hook-form';
+import * as S from './Input.style';
 
 type FormValues = { [key: string]: string };
 
 interface Props extends UseControllerProps<FormValues> {
-  label: string;
-  type: string;
+  title: string;
+  type: Type;
 }
 
-export default function Test({ name, label, type, control, ...rest }: Props) {
-  const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+type Type = 'email' | 'password';
+
+export default function Test({ type, title, name, control, ...rest }: Props) {
+  const emailRegex =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const pwRegex = /^[0-9a-zA-Z]{8,100}$/;
+
+  const errorMessages: { [key: string]: string } = {
+    email: '이메일 형식으로 작성해주세요.',
+    password: '8자 이상 입력해 주세요.',
+  };
 
   const rule = type === 'email' ? emailRegex : pwRegex;
 
-  const { field, fieldState, formState } = useController({
+  const { field, formState } = useController({
     name,
     control,
     rules: { pattern: rule },
   });
 
-  // console.log(formState.errors);
-
   return (
     <div>
-      <label>{label}</label>
-      <input {...field} {...rest} />
-      {formState.errors[name] && <p>{`${name} 에러`}</p>}
-      {fieldState.error && <p>{fieldState.error.message}</p>}
+      <S.Title>{title}</S.Title>
+      <S.Input
+        {...field}
+        {...rest}
+        type={type}
+        $isError={!!formState.errors[name]}
+      />
+      {formState.errors[name] && <S.Error>{errorMessages[name]}</S.Error>}
     </div>
   );
 }
