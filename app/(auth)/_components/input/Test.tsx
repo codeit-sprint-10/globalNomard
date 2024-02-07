@@ -6,12 +6,20 @@ type FormValues = { [key: string]: string };
 
 interface Props extends UseControllerProps<FormValues> {
   title: string;
+  placeholder: string;
   type: Type;
 }
 
 type Type = 'email' | 'password';
 
-export default function Test({ type, title, name, control, ...rest }: Props) {
+export default function Test({
+  title,
+  placeholder,
+  type,
+  name,
+  control,
+  ...rest
+}: Props) {
   const emailRegex =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const pwRegex = /^[0-9a-zA-Z]{8,100}$/;
@@ -36,6 +44,7 @@ export default function Test({ type, title, name, control, ...rest }: Props) {
         {...field}
         {...rest}
         type={type}
+        placeholder={placeholder}
         $isError={!!formState.errors[name]}
       />
       {formState.errors[name] && <S.Error>{errorMessages[name]}</S.Error>}

@@ -1,52 +1,64 @@
 /* eslint-disable prettier/prettier */
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useController, UseControllerProps } from 'react-hook-form';
 import * as S from './Input.style';
 
-interface Props {
+type FormValues = { [key: string]: string };
+
+interface Props extends UseControllerProps<FormValues> {
   title: string;
-  type?: Type;
   placeholder: string;
+  type: Type;
 }
 
-type Inputs = {
-  email: string;
-  password: string;
-};
+type Type = 'email' | 'password' | 'nickname' | 'passwordCheck';
 
-type Type = 'email' | 'password';
-
-export default function Input({ title, type = 'email', placeholder }: Props) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>({ mode: 'onChange' });
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
+export default function Input({
+  title,
+  placeholder,
+  type,
+  name,
+  control,
+  ...rest
+}: Props) {
   const emailRegex =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
   const pwRegex = /^[0-9a-zA-Z]{8,100}$/;
+  const nameRegex = /^.{3,}/;
 
-  const validationPattern = type === 'email' ? emailRegex : pwRegex;
-
-  const errorMessages = {
+  const errorMessages: { [key: string]: string } = {
     email: '이메일 형식으로 작성해주세요.',
     password: '8자 이상 입력해 주세요.',
+    nickname: '3글자 이상 입력해 주세요.',
   };
 
+  let rule;
+  if (type === 'email') {
+    rule = emailRegex;
+  } else if (type === 'password') {
+    rule = pwRegex;
+  } else if (type === 'nickname') {
+    rule = nameRegex;
+  }
+
+  const { field, formState } = useController({
+    name,
+    control,
+    rules: { pattern: rule },
+  });
+
+  console.log(formState.errors);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <S.Wrapper>
-        <S.Title>{title}</S.Title>
-        <S.Input
-          {...register(type, { required: true, pattern: validationPattern })}
-          type={type}
-          placeholder={placeholder}
-          $isError={!!errors[type]}
-        />
-        {errors[type] && <S.Error>{errorMessages[type]}</S.Error>}
-      </S.Wrapper>
-    </form>
+    <S.Wrapper>
+      <S.Title>{title}</S.Title>
+      <S.Input
+        {...field}
+        {...rest}
+        type={type}
+        placeholder={placeholder}
+        $isError={!!formState.errors[name]}
+      />
+      {formState.errors[name] && <S.Error>{errorMessages[name]}</S.Error>}
+    </S.Wrapper>
   );
 }

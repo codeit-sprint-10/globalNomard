@@ -22,6 +22,13 @@ export const Wrapper = styled.div`
 export const Logo = styled(Image)`
   width: 34rem;
   height: 19.2rem;
+  margin: 0 auto;
+`;
+
+export const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 `;
 
 export const Info = styled.div`
