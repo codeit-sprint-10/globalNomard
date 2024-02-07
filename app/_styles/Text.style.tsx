@@ -1,3 +1,4 @@
+'use client';
 import styled from 'styled-components';
 import { RESPONSIBLE_SIZE } from '@/_styles/constants';
 
