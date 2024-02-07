@@ -1,8 +1,8 @@
+/* eslint-disable prettier/prettier */
 'use client';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
-import Input from '../_components/input/Input';
-import * as S from '@/_styles/sign.style';
-import Test from '../_components/input/Test';
+import Input from '../../_components/input/Input';
+import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
 
 function Page() {
@@ -14,21 +14,24 @@ function Page() {
 
   return (
     <S.Wrapper>
-      <form onSubmit={onSubmit}>
-        <Test
-          label="Example"
+      <S.Form onSubmit={onSubmit}>
+        <Input
+          title="이메일"
           name="email"
+          placeholder="이메일을 입력해 주세요"
           type="email"
           control={control}
           rules={{ required: 'This field is required' }}
         />
-      </form>
-      <Input title="이메일" type="email" placeholder="이메일을 입력해 주세요" />
-      <Input
-        title="비밀번호"
-        type="email"
-        placeholder="비밀번호를 입력해 주세요"
-      />
+        <Input
+          title="비밀번호"
+          name="password"
+          placeholder="비밀번호를 입력해 주세요"
+          type="password"
+          control={control}
+          rules={{ required: 'This field is required' }}
+        />
+      </S.Form>
       <PlainButton style="primary" height="4.8rem" roundSize="M">
         로그인 하기
       </PlainButton>
