@@ -1,5 +1,5 @@
-import BtnPlus from '@/assets/icons/btn_plus.svg';
-import BtnMinus from '@/assets/icons/btn_minus.svg';
+import BtnPlus from '@/assets/icons/BtnMinus';
+import BtnMinus from '@/assets/icons/BtnMinus';
 import * as S from './AddButton.style';
 interface Props {
   type: 'plus' | 'minus';
