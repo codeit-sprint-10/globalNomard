@@ -1,5 +1,5 @@
 'use client';
 
 export default function Home() {
-  return <div>랜딩페이지</div>;
+  return <div>홈 페이지(랜딩 페이지)</div>;
 }

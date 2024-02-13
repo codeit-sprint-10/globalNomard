@@ -1,4 +1,3 @@
-
 'use client';
 import * as S from './footer.style';
 import { Text, TextType } from '@/_styles/Text';
