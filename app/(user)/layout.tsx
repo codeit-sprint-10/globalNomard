@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
-import Footer from '@/(user)/_components/Footer';
+import Footer from './_components/FNB/Footer';
 
 export default function UserLayout({ children }: { children: ReactNode }) {
   return (
     <div>
-      홈 레이아웃
-      {children}
       <Footer />
+      (user) 레이아웃
+      {children}
     </div>
   );
 }
