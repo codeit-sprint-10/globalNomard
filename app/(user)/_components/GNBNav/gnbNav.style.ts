@@ -1,26 +1,32 @@
-import COLORS from '@/_styles/colors';
 import { RESPONSIBLE_SIZE } from '@/_styles/constants';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  max-width: 192rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   width: 100%;
-  height: 16rem;
-  background-color: ${COLORS.BLACK50};
-  color: ${COLORS.GRAY75};
-  padding: 3.2rem 11.1rem 0;
+  height: 7rem;
   white-space: nowrap;
+  padding: 0 2.4rem;
 
   @media screen and (max-width: ${RESPONSIBLE_SIZE.tablet}) {
-    background-color: yellow;
   }
 
   @media screen and (max-width: ${RESPONSIBLE_SIZE.mobile}) {
-    background-color: red;
-    padding: 3.2rem 3.9rem 0;
   }
 `;
 
-export const MenuWrapper = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 120rem;
+  width: 100%;
+  gap: 5rem;
+`;
+
+export const MenuWrapper = styled.div`
+  display: flex;
+  gap: 2.5rem;
+`;

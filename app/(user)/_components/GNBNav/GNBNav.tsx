@@ -1,22 +1,17 @@
 'use client';
 import * as React from 'react';
-import * as S from './gnbNav.style'; // Fix the casing of the file name
-import { Text, TextType } from '@/_styles/Text';
+import * as S from './gnbNav.style';
+import { useEffect, useState } from 'react';
 import GNBMenuButton from '@/(user)/_components/GNBMenuButton/GNBMenuButton';
-import Link from 'next/link';
+import LogoButton from '@/(user)/_components/LogoButton/LogoButton';
+import ProfileButton from '@/(user)/_components/ProfileButton/ProfileButton';
 
 interface Props {
-  userType?: 'login' | undefined;
+  userType?: 'profile' | undefined;
 }
 
 function GNBNav({ userType }: Props) {
   const [token, setToken] = useState<string>('');
-
-  const handleSignOut = () => {
-    localStorage.removeItem('token');
-    setToken('');
-    window.location.href = '/';
-  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -30,19 +25,20 @@ function GNBNav({ userType }: Props) {
 
   return (
     <S.Wrapper>
-      <로고 />
-      {userType === 'login' ? (
-        <S.MenuWrapper>
-          <GNBMenuButton type={userType} />
-          <GNBMenuButton type="signOut" onClick={handleSignOut} />
-          {/* <NotificationButton/> */}
-        </S.MenuWrapper>
-      ) : (
-        <S.MenuWrapper>
-          <GNBMenuButton type="signIn" />
-          <GNBMenuButton type="signUp" />
-        </S.MenuWrapper>
-      )}
+      <S.Container>
+        <LogoButton />
+        {userType === 'profile' ? (
+          <S.MenuWrapper>
+            <ProfileButton />
+            <GNBMenuButton type={userType} />
+          </S.MenuWrapper>
+        ) : (
+          <S.MenuWrapper>
+            <GNBMenuButton type="signIn" />
+            <GNBMenuButton type="signUp" />
+          </S.MenuWrapper>
+        )}
+      </S.Container>
     </S.Wrapper>
   );
 }

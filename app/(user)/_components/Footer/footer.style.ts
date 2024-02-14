@@ -14,11 +14,9 @@ export const FooterWrapper = styled.div`
   white-space: nowrap;
 
   @media screen and (max-width: ${RESPONSIBLE_SIZE.tablet}) {
-    background-color: yellow;
   }
 
   @media screen and (max-width: ${RESPONSIBLE_SIZE.mobile}) {
-    background-color: red;
     padding: 3.2rem 3.9rem 0;
   }
 `;

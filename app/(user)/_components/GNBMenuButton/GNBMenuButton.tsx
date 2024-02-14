@@ -3,7 +3,7 @@ import * as S from './gnbMenuButton.style'; // Fix the casing of the file name
 import { Text, TextType } from '@/_styles/Text';
 
 interface Props {
-  type: 'login' | 'signOut' | 'signIn' | 'signUp';
+  type: 'profile' | 'signOut' | 'signIn' | 'signUp';
   onClick?: () => void;
 }
 
@@ -11,11 +11,10 @@ function GNBMenuButton({ type, onClick }: Props) {
   let link = '/';
   let content = '';
 
-  // 미완성
   switch (type) {
-    case 'login':
-      link = '';
-      content = '내 프로필';
+    case 'profile':
+      link = '/my/memberinfo';
+      content = '내이름';
       break;
     case 'signOut':
       link = '/';
@@ -36,11 +35,13 @@ function GNBMenuButton({ type, onClick }: Props) {
   return (
     <S.Wrapper>
       <Link href={link} onClick={onClick}>
-        <Text
-          $normalType={TextType.Pre21}
-          $mobileType={TextType.Pre21}
-          text={content}
-        />
+        <S.StyledWrapper>
+          <Text
+            $normalType={TextType.Pre21}
+            $mobileType={TextType.Pre21}
+            text={content}
+          />
+        </S.StyledWrapper>
       </Link>
     </S.Wrapper>
   );
