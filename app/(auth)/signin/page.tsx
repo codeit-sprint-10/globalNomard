@@ -5,7 +5,7 @@ import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
 
-function Page() {
+function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
 
   const onSubmit = handleSubmit((data) => {
@@ -42,4 +42,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Signin;

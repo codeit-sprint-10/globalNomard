@@ -1,15 +1,27 @@
-/* eslint-disable prettier/prettier */
 'use client';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
 import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
+import { postUser } from '@/_api/postUser';
 
-function Page() {
+function Signup() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const postNewUser = async (data: any) => {
+    try {
+      const { email, nickname, password } = data;
+
+      const res = await postUser({ email, nickname, password });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data.password);
+    postNewUser(data);
   });
 
   return (
@@ -54,7 +66,7 @@ function Page() {
         height="4.8rem"
         roundSize="M"
       >
-        로그인 하기
+        회원가입 하기
       </PlainButton>
       <S.Info>
         회원이 아니신가요? <S.Span>회원가입하기</S.Span>
@@ -63,4 +75,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Signup;

@@ -3,7 +3,7 @@ import * as S from './gnbMenuButton.style'; // Fix the casing of the file name
 import { Text, TextType } from '@/_styles/Text';
 
 interface Props {
-  type: 'profile' | 'signOut' | 'signIn' | 'signUp';
+  type: 'member' | 'signOut' | 'signIn' | 'signUp';
   onClick?: () => void;
 }
 
@@ -12,7 +12,7 @@ function GNBMenuButton({ type, onClick }: Props) {
   let content = '';
 
   switch (type) {
-    case 'profile':
+    case 'member':
       link = '/my/memberinfo';
       content = '내이름';
       break;
