@@ -22,7 +22,7 @@ export default function Card({ data }: Activity) {
           <Text $normalType={TextType.Pre13} text={title} />
         </S.Title>
         <S.Price>
-          <Text $normalType={TextType.Pre14} text={price} />
+          <Text $normalType={TextType.Pre14} text={`₩ ${price} 원`} />
           <S.Span>
             <Text $normalType={TextType.Pre15} text="/ 인" />
           </S.Span>
