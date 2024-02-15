@@ -2,15 +2,7 @@ import React from 'react';
 import * as S from './card.style';
 import Star from '@/assets/icons/Star.svg';
 import Text, { TextType } from '@/_styles/Text';
-import { StaticImageData } from 'next/image';
-
-interface Data {
-  id: number;
-  images: StaticImageData;
-  title: string;
-  price: string;
-  point: string;
-}
+import { Data } from '../type';
 
 interface Activity {
   data: Data;
