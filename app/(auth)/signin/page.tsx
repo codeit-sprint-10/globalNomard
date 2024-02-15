@@ -1,15 +1,27 @@
-/* eslint-disable prettier/prettier */
 'use client';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
 import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
+import { postUser } from '@/_api/postUser';
 
 function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const User = async (data: any) => {
+    try {
+      const { email, password } = data;
+
+      const res = await postUser({ email, password });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    User(data);
   });
 
   return (
@@ -32,7 +44,12 @@ function Signin() {
           rules={{ required: 'This field is required' }}
         />
       </S.Form>
-      <PlainButton style="primary" height="4.8rem" roundSize="M">
+      <PlainButton
+        onClick={onSubmit}
+        style="primary"
+        height="4.8rem"
+        roundSize="M"
+      >
         로그인 하기
       </PlainButton>
       <S.Info>

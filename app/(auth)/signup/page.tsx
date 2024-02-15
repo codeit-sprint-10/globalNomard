@@ -3,17 +3,17 @@ import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
 import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
-import { postUser } from '@/_api/postUser';
+import { postNewUser } from '@/_api/postNewUser';
 
 function Signup() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const postNewUser = async (data: any) => {
+  const newUser = async (data: any) => {
     try {
       const { email, nickname, password } = data;
 
-      const res = await postUser({ email, nickname, password });
+      const res = await postNewUser({ email, nickname, password });
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -21,7 +21,7 @@ function Signup() {
   };
 
   const onSubmit = handleSubmit((data) => {
-    postNewUser(data);
+    newUser(data);
   });
 
   return (
