@@ -8,7 +8,7 @@ import Text, { TextType } from '@/_styles/Text';
 export default function Card() {
   return (
     <S.Container>
-      <S.Background src={IMAGES.streetDance} alt="dummy" />
+      <S.Background src={IMAGES.activity1} alt="dummy" />
       <S.Wrapper>
         <S.Point>
           <Star />
