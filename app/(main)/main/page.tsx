@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
-import Card from '../_components/card/Card';
+import CardList from '../_components/cardList/CardList';
 
 export default function Main() {
   return (
     <div>
-      <Card />
+      <CardList />
     </div>
   );
 }
