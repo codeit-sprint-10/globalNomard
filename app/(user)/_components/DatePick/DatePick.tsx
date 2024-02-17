@@ -7,21 +7,19 @@ import { ko } from 'date-fns/esm/locale'; //한국어 설정
 import COLORS from '@/_styles/colors';
 import Button from '@/_components/Button/Button';
 
+interface Props {
+  onClick: (data: DateType) => void;
+}
+
 export interface DateType {
   date: Date | undefined;
   startTime: Date | undefined;
   endTime: Date | undefined;
 }
 
-interface Props {
-  onClick: (data: DateType) => void;
-}
-
 function DatePick({ onClick }: Props) {
   const [selectedDate, setSelectedDate] = useState<Date>();
-  // 시작 시간
   const [startTime, setStartTime] = useState<Date>();
-  // 종료 시간
   const [endTime, setEndTime] = useState<Date>();
 
   const date: DateType = {

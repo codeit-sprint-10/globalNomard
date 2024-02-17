@@ -1,12 +1,12 @@
-import { useController, UseControllerProps } from 'react-hook-form';
+import { useController, UseControllerProps, Control } from 'react-hook-form';
 import styled from 'styled-components';
 import COLORS from '@/_styles/colors';
-
-type FormValues = { [key: string]: string };
+import { FormValues } from '@/(user)/my/register/page';
 
 interface Props extends UseControllerProps<FormValues> {
   type?: 'text' | 'number' | 'textArea';
   placeholder: string;
+  control: Control<FormValues>;
 }
 
 function UseInput({ type, placeholder, name, control, ...rest }: Props) {

@@ -10,29 +10,49 @@ import UseSelect from '@/(user)/_components/UseSelect/UseSelect';
 import DatePick, { DateType } from '@/(user)/_components/DatePick/DatePick';
 import { useState } from 'react';
 import COLORS from '@/_styles/colors';
+import Upload from '@/(user)/_components/Upload/Upload';
+import { Activities, Schedule } from '@/_api/activities/activities.types';
+import { CreateActivities } from '@/_api/activities/createActivities';
 
-type FormValues = {
-  [key: string]: string;
+export type FormValues = {
+  title: string;
+  category?: string;
+  description: string;
+  price: number;
+  bannerImageUrl?: string;
 };
-
-interface DateTypes {
-  date: string;
-  startTime: string | undefined;
-  endTime: string | undefined;
-}
 
 function Page() {
   //datePicker value state 초기값 빈배열
-  const [reservation, setReservation] = useState<DateTypes[]>([]);
+  const [reservation, setReservation] = useState<Schedule[]>([]);
+  const [bannerImg, setBannerImg] = useState<string>('');
 
   const { control, handleSubmit, formState } = useForm<FormValues>({
     mode: 'onChange',
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     //DatePicker 데이터를 가져옴
     //API를 연결하여 데이터 전송
-    console.log(data);
+    const { category, description, price, title } = data;
+
+    const reqBody: Activities = {
+      title,
+      category: category || '',
+      description,
+      price,
+      address: '서울특별시 강남구 테헤란로 427',
+      schedules: reservation,
+      bannerImageUrl: bannerImg || '',
+    };
+    console.log(reqBody);
+    await CreateActivities(reqBody);
+  };
+
+  const onRemove = (date: string) => {
+    setReservation(
+      reservation.filter((reservation) => reservation.date !== date),
+    );
   };
 
   const handleDatePickSubmit = (data: DateType) => {
@@ -43,21 +63,27 @@ function Page() {
     const dateValue = `${year}-${month}-${date}`;
     const startTime = data.startTime?.toString().substring(16, 21);
     const endTime = data.endTime?.toString().substring(16, 21);
-    const dates = [
-      {
-        date: dateValue,
-        startTime,
-        endTime,
-      },
-    ];
-    // console.log(dateForm);
-    // console.log(startTime?.substring(16, 21));
-    // console.log(endTime?.substring(16, 21));
+    const dates: Schedule = {
+      times: [
+        {
+          startTime: startTime || '',
+          endTime: endTime || '',
+        },
+      ],
+      date: dateValue,
+    };
+
     setReservation(reservation.concat(dates));
     //state 관리
   };
 
-  console.log(reservation);
+  const handleFilePickSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setBannerImg(imageUrl);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -98,16 +124,22 @@ function Page() {
         <Text $normalType={TextType.Pre8} text="예약 가능한 시간대" />
         <DatePick onClick={handleDatePickSubmit} />
         {reservation &&
-          reservation.map((reservations) => (
+          reservation.map(({ times, date }, idx) => (
             <ReservationContainer>
-              <ReservationDate>{reservations.date}</ReservationDate>
+              <ReservationDate>{date}</ReservationDate>
               <TimeContainer>
-                <ReservationTime>{reservations.startTime}</ReservationTime>
-                <ReservationTime>{reservations.endTime}</ReservationTime>
+                <ReservationTime>{times?.[idx]?.startTime}</ReservationTime>
+                <ReservationTime>{times?.[idx]?.endTime}</ReservationTime>
               </TimeContainer>
-              <Button.Add style="minus" type="button"></Button.Add>
+              <Button.Add
+                style="minus"
+                type="button"
+                onClick={() => onRemove(date)}
+              ></Button.Add>
             </ReservationContainer>
           ))}
+        <Text $normalType={TextType.Pre8} text="배너 이미지" />
+        <Upload onChange={handleFilePickSubmit} uploadImage={bannerImg} />
       </Wrapper>
     </form>
   );

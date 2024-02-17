@@ -1,8 +1,7 @@
+import { FormValues } from '@/(user)/my/register/page';
 import COLORS from '@/_styles/colors';
 import { useController, UseControllerProps } from 'react-hook-form';
 import { styled } from 'styled-components';
-
-type FormValues = { [key: string]: string };
 
 interface Props extends UseControllerProps<FormValues> {}
 
