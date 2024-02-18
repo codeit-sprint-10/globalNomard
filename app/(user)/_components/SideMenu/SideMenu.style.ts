@@ -1,7 +1,9 @@
+import { RESPONSIBLE_SIZE } from '@/_styles/constants';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  width: 384px;
+  width: 38.4rem;
+  height: 43.2rem;
   border-radius: 12px;
   border: 1px solid #dddddd;
   padding: 24px;
@@ -9,11 +11,11 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   gap: 24px;
 
-  @media (max-width: 1200px) {
-    width: 251px;
+  @media screen and (max-width: ${RESPONSIBLE_SIZE.tablet}) {
+    width: 25.1rem;
   }
 
-  @media (max-width: 768px) {
+  @media screen and (max-width: ${RESPONSIBLE_SIZE.mobile}) {
     display: none;
   }
 `;
