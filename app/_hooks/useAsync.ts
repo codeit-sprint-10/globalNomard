@@ -1,26 +1,19 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function useAsync<T extends any[], U>(
-  asyncFunction: (...args: T) => Promise<U>,
-): { execute: (...args: T) => Promise<U>; loading: boolean } {
-  const [loading, setLoading] = useState(false);
-
+function useAsync(asyncFunction) {
   const execute = useCallback(
-    async (...args: T) => {
-      setLoading(true);
-
+    async (...args) => {
       try {
         const response = await asyncFunction(...args);
         return response;
-      } finally {
-        setLoading(false);
+      } catch (err) {
+        throw err;
       }
     },
     [asyncFunction],
   );
 
-  return { execute, loading };
+  return { execute };
 }
 
 export default useAsync;

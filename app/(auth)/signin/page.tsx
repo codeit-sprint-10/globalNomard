@@ -1,27 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
 import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
 import { postUser } from '@/_api/postUser';
+import useSignin from '@/_hooks/useSignin';
+import useAsync from '@/_hooks/useAsync';
 
 function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
+  // const { execute } = useAsync(postUser);
+  // postUser의 인수에 email, password를 넣어서 실행함
+  // postUser는 /{teamId}/auth/login 경로로 POST함수를 통해 POST요청을 보냄
+  // POST함수는 (url, body, token)로 이루어짐. body에는 Props가 들어감.
+  // execute는 postUser함수를 실행함.
+  const { email, password } = useSignin();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // const Props = {
+  //   email,
+  //   password,
+  // };
+
   const User = async (data: any) => {
     try {
       const { email, password } = data;
 
       const res = await postUser({ email, password });
-      console.log(res);
+      // res로 받아온 email, password를 zustand에 넣어야함.
+      // 이걸 token으로도 받아와야함.
+      console.log(res, 'zz');
     } catch (error) {
       console.log(error);
     }
+
+    
+
   };
 
   const onSubmit = handleSubmit((data) => {
     User(data);
+    // 폼을 제출하면 User의 data에 폼 데이터를 전달함.
+    // data에는 폼의 데이터(email, password)가 들어있음.
+    // User함수는 postUser함수를 비동기적으로 실행함.
   });
 
   return (

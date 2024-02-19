@@ -22,7 +22,7 @@ export interface User {
   updatedAt: string;
 }
 
-export const useUserinfo = create<UserInfoState>(
+export const useUserinfo = create<UserInfoState>()(
   persist(
     (set) => ({
       userInfo: {} as User,
@@ -33,7 +33,7 @@ export const useUserinfo = create<UserInfoState>(
     }),
     {
       name: 'userInfo-storage',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     },
   ),
 );
