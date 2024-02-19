@@ -1,7 +1,7 @@
-import Info from '@/assets/icons/info.svg';
-import ReservationDetails from '@/assets/icons/ReservationDetails.svg';
-import ExperienceManagement from '@/assets/icons/ExperienceManagement.svg';
-import CurrentSituation from '@/assets/icons/currentSituation.svg';
+import Info from '@/assets/icons/Info';
+import ReservationDetails from '@/assets/icons/ReservationIcon';
+import ExperienceManagement from '@/assets/icons/ExManagement';
+import CurrentSituation from '@/assets/icons/CurrentSituIcon';
 import * as S from './Menu.style';
 
 function Menu() {
