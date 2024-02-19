@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { Text, TextType } from '@/_styles/Text';
-import Button from '@/_components/Button/Button';
 import { RESPONSIBLE_SIZE } from '@/_styles/constants';
 import { useForm } from 'react-hook-form';
 import UseInput from '@/(user)/_components/UseInput/UseInput';
@@ -13,6 +12,8 @@ import COLORS from '@/_styles/colors';
 import Upload from '@/(user)/_components/Upload/Upload';
 import { Activities, Schedule } from '@/_api/activities/activities.types';
 import { CreateActivities } from '@/_api/activities/createActivities';
+import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
+import { AddButton } from '@/_components/Button/AddButton/AddButton';
 
 export type FormValues = {
   title: string;
@@ -90,7 +91,7 @@ function Page() {
       <Wrapper>
         <PageHeader>
           <Text $normalType={TextType.Pre22} text="내 체험 등록" />
-          <Button.Plain
+          <PlainButton
             style="primary"
             roundSize="S"
             width="12rem"
@@ -99,7 +100,7 @@ function Page() {
             isNotActive={formState.isValid ? false : true}
           >
             <Text $normalType={TextType.Pre10} text="수정하기" />
-          </Button.Plain>
+          </PlainButton>
         </PageHeader>
         <UseInput
           type="text"
@@ -131,11 +132,11 @@ function Page() {
                 <ReservationTime>{times?.[idx]?.startTime}</ReservationTime>
                 <ReservationTime>{times?.[idx]?.endTime}</ReservationTime>
               </TimeContainer>
-              <Button.Add
+              <AddButton
                 style="minus"
                 type="button"
                 onClick={() => onRemove(date)}
-              ></Button.Add>
+              ></AddButton>
             </ReservationContainer>
           ))}
         <Text $normalType={TextType.Pre8} text="배너 이미지" />
@@ -153,7 +154,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 24px;
   padding: 0.8rem;
-  border: 1px solid black;
 
   @media screen and (max-width: ${RESPONSIBLE_SIZE.tablet}) {
     width: 42.9rem;
