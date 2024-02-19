@@ -1,20 +1,23 @@
 import React from 'react';
 import * as S from './banner.style';
-import IMAGES from '@/public/images';
 import Text, { TextType } from '@/_styles/Text';
+import { Data } from '../type';
 
-export default function BannerItem() {
+interface Props {
+  data: Data;
+}
+
+export default function BannerItem({ data }: Props) {
+  console.log(data);
   return (
-    <div>
-      <S.Wrapper>
-        <S.Background src={IMAGES.activity6} alt="banner" />
-        <S.TextWrapper>
-          <S.Title>
-            <Text $normalType={TextType.Pre7} text="asdf" />
-          </S.Title>
-          <Text $normalType={TextType.Pre8} text="1월의 인기 체험 BEST 🔥" />
-        </S.TextWrapper>
-      </S.Wrapper>
-    </div>
+    <S.Wrapper>
+      <S.Background src={data.images} alt="banner" />
+      <S.TextWrapper>
+        <S.Title>
+          <Text $normalType={TextType.Pre7} text={data.title} />
+        </S.Title>
+        <Text $normalType={TextType.Pre8} text="1월의 인기 체험 BEST 🔥" />
+      </S.TextWrapper>
+    </S.Wrapper>
   );
 }

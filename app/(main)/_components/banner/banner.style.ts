@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 
-interface ListContainerProps {
-  currentIndex: number;
-}
-
-export const ListContainer = styled.div<ListContainerProps>`
+// Banner
+export const Container = styled.div`
   display: flex;
   flex-direction: row;
+`;
 
-  transform: translate(${(props) => props.currentIndex * (100 + 2.4)}%);
+export const ListContainer = styled.div<{ currentIndex: number }>`
+  transform: translateX(${(props) => -props.currentIndex * 100}%);
   transition: transform 0.3s ease;
 `;
 
+// BannerItem
 export const Wrapper = styled.div`
   width: 100%;
   height: 55rem;

@@ -10,7 +10,7 @@ import Banner from '../_components/banner/Banner';
 export default function Main() {
   return (
     <div>
-      <Banner data={activityDummy} />
+      <Banner datas={activityDummy} />
       <CardList data={activityDummy} />
       <CategoryList />
       <SmallCardList data={activityDummy} />
