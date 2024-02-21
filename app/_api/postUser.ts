@@ -10,7 +10,7 @@ export const postUser = async ({ email, password }: Props) => {
     email,
     password,
   };
-  console.log(body);
+  console.log(body, 'postUser 테스트');
 
   const { data } = await POST(`/auth/login`, body);
   return data;

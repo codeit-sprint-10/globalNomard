@@ -5,44 +5,28 @@ import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
 import { postUser } from '@/_api/postUser';
-import useSignin from '@/_hooks/useSignin';
-import useAsync from '@/_hooks/useAsync';
+import { useRouter } from 'next/navigation';
 
 function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
-  // const { execute } = useAsync(postUser);
-  // postUser의 인수에 email, password를 넣어서 실행함
-  // postUser는 /{teamId}/auth/login 경로로 POST함수를 통해 POST요청을 보냄
-  // POST함수는 (url, body, token)로 이루어짐. body에는 Props가 들어감.
-  // execute는 postUser함수를 실행함.
-  const { email, password } = useSignin();
-
-  // const Props = {
-  //   email,
-  //   password,
-  // };
+  const router = useRouter();
 
   const User = async (data: any) => {
     try {
       const { email, password } = data;
-
+      // data = 내가 친 email, password만 들어있음
       const res = await postUser({ email, password });
-      // res로 받아온 email, password를 zustand에 넣어야함.
-      // 이걸 token으로도 받아와야함.
-      console.log(res, 'zz');
+      console.log(res);
+      localStorage.setItem('token', res.accessToken);
+      localStorage.setItem('token', res.refreshToken);
+      router.push('/home');
     } catch (error) {
       console.log(error);
     }
-
-    
-
   };
 
   const onSubmit = handleSubmit((data) => {
     User(data);
-    // 폼을 제출하면 User의 data에 폼 데이터를 전달함.
-    // data에는 폼의 데이터(email, password)가 들어있음.
-    // User함수는 postUser함수를 비동기적으로 실행함.
   });
 
   return (
