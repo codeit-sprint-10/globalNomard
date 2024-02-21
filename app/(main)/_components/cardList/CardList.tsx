@@ -11,7 +11,7 @@ export default function CardList({ data }: Activity) {
 
   const handleLeftButtonClick = () => {
     if (currentIndex === 0) {
-      console.log('first card');
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
       return;
     }
 

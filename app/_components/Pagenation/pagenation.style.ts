@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   gap: 1rem;
 
   width: 48rem;
-  margin: 0 auto;
+  margin: 0 auto 22.2rem;
 `;
 
 export const ArrowButton = styled.div`

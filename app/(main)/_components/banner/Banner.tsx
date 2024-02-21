@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Data } from '../type';
 import BannerItem from './BannerItem';
 import * as S from './banner.style';
@@ -8,15 +8,17 @@ interface Props {
 }
 
 export default function Banner({ datas }: Props) {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  //   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % datas.length);
-    }, 5000); // 5초마다 페이지를 전환
+  //   useEffect(() => {
+  //     const interval = setInterval(() => {
+  //       setCurrentIndex((prevIndex) => (prevIndex + 1) % datas.length);
+  //     }, 5000); // 5초마다 페이지를 전환
 
-    return () => clearInterval(interval);
-  }, [datas.length]);
+  //     return () => clearInterval(interval);
+  //   }, [datas.length]);
+
+  const currentIndex = 0;
 
   return (
     <S.Container>
