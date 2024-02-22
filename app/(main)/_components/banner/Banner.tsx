@@ -8,22 +8,10 @@ interface Props {
 }
 
 export default function Banner({ datas }: Props) {
-  //   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setCurrentIndex((prevIndex) => (prevIndex + 1) % datas.length);
-  //     }, 5000); // 5초마다 페이지를 전환
-
-  //     return () => clearInterval(interval);
-  //   }, [datas.length]);
-
-  const currentIndex = 0;
-
   return (
     <S.Container>
       {datas.map((item) => (
-        <S.ListContainer key={item.id} currentIndex={currentIndex}>
+        <S.ListContainer key={item.id}>
           <BannerItem data={item} />
         </S.ListContainer>
       ))}

@@ -10,7 +10,7 @@ interface Props {
 export default function BannerItem({ data }: Props) {
   return (
     <S.Wrapper>
-      {/* <S.Background src={data.images} alt="banner" /> */}
+      <S.Background src={data.images} alt="banner" />
       <S.TextWrapper>
         <S.Title>
           <Text $normalType={TextType.Pre7} text={data.title} />
