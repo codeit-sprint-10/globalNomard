@@ -7,7 +7,7 @@ import LogoButton from '@/(user)/_components/LogoButton/LogoButton';
 import ProfileButton from '@/(user)/_components/ProfileButton/ProfileButton';
 
 interface Props {
-  userType?: 'profile' | undefined;
+  userType?: 'member' | undefined;
 }
 
 function GNBNav({ userType }: Props) {
@@ -27,7 +27,7 @@ function GNBNav({ userType }: Props) {
     <S.Wrapper>
       <S.Container>
         <LogoButton />
-        {userType === 'profile' ? (
+        {userType === 'member' ? (
           <S.MenuWrapper>
             <ProfileButton />
             <GNBMenuButton type={userType} />
