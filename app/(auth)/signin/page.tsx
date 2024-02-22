@@ -6,19 +6,19 @@ import * as S from '@/(auth)/sign.style';
 import { useForm } from 'react-hook-form';
 import { postUser } from '@/_api/postUser';
 import { useRouter } from 'next/navigation';
+import { useUserinfo } from '@/_hooks/useUserinfo';
 
 function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
   const router = useRouter();
+  const { setUserinfo } = useUserinfo();
 
   const User = async (data: any) => {
     try {
       const { email, password } = data;
-      // data = 내가 친 email, password만 들어있음
       const res = await postUser({ email, password });
       console.log(res);
-      localStorage.setItem('token', res.accessToken);
-      localStorage.setItem('token', res.refreshToken);
+      setUserinfo({}, res.accessToken, res.refreshToken);
       router.push('/home');
     } catch (error) {
       console.log(error);

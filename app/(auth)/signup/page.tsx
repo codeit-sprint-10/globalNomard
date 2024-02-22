@@ -7,6 +7,7 @@ import { postNewUser } from '@/_api/postNewUser';
 
 function Signup() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
+  const [token, setToken] = useState<string>('');
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const newUser = async (data: any) => {

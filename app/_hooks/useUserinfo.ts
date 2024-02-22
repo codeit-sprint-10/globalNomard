@@ -3,15 +3,16 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 interface UserInfoState {
   userInfo: User;
-  token: string | null;
-  setUserinfo: (user: User, token: string) => void;
+  accessToken: string | null;
+  refreshToken: string | null;
+  setUserinfo: (user: User, accessToken: string, refreshToken: string) => void;
 }
 
-export interface UserInfoResponse {
-  accessToken: string;
-  refreshToken: string;
-  user: User;
-}
+// export interface UserInfoResponse {
+//   accessToken: string;
+//   refreshToken: string;
+//   user: User;
+// }
 
 export interface User {
   id: number;
@@ -26,9 +27,18 @@ export const useUserinfo = create<UserInfoState>()(
   persist(
     (set) => ({
       userInfo: {} as User,
-      token: null as string | null,
-      setUserinfo: (user: User, token: string) => {
-        set({ userInfo: user, token: token });
+      accessToken: null as string | null,
+      refreshToken: null as string | null,
+      setUserinfo: (
+        userInfo: User,
+        accessToken: string,
+        refreshToken: string,
+      ) => {
+        set({
+          userInfo: userInfo,
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        });
       },
     }),
     {
