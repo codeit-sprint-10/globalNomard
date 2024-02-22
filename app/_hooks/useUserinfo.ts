@@ -1,18 +1,11 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
 interface UserInfoState {
   userInfo: User;
   accessToken: string | null;
-  refreshToken: string | null;
-  setUserinfo: (user: User, accessToken: string, refreshToken: string) => void;
+  setUserinfo: (user: User, accessToken: string) => void;
 }
-
-// export interface UserInfoResponse {
-//   accessToken: string;
-//   refreshToken: string;
-//   user: User;
-// }
 
 export interface User {
   id: number;
@@ -24,26 +17,22 @@ export interface User {
 }
 
 export const useUserinfo = create<UserInfoState>()(
-  persist(
-    (set) => ({
-      userInfo: {} as User,
-      accessToken: null as string | null,
-      refreshToken: null as string | null,
-      setUserinfo: (
-        userInfo: User,
-        accessToken: string,
-        refreshToken: string,
-      ) => {
-        set({
-          userInfo: userInfo,
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        });
+  devtools(
+    persist(
+      (set) => ({
+        userInfo: {} as User,
+        accessToken: null as string | null,
+        setUserinfo: (userInfo: User, accessToken: string) => {
+          set({
+            userInfo: userInfo,
+            accessToken: accessToken,
+          });
+        },
+      }),
+      {
+        name: 'userInfo-storage',
+        storage: createJSONStorage(() => localStorage),
       },
-    }),
-    {
-      name: 'userInfo-storage',
-      storage: createJSONStorage(() => localStorage),
-    },
+    ),
   ),
 );
