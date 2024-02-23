@@ -2,6 +2,10 @@ import COLORS from '@/_styles/colors';
 import styled from 'styled-components';
 import Image from 'next/image';
 
+interface Props {
+  status: 'pending' | 'canceled' | 'confirmed' | 'declined' | 'completed';
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,8 +33,7 @@ const STATUS_INFO = {
   completed: { color: COLORS.GRAY70 },
 };
 
-export const Status = styled.div<{
-  status: 'pending' | 'canceled' | 'confirmed' | 'declined' | 'completed';
-}>`
-  ${({ status }) => STATUS_INFO[status]}
+export const Status = styled.div<Props>`
+  color: ${({ status }) => STATUS_INFO[status]};
+  margin-bottom: 0.8rem;
 `;
