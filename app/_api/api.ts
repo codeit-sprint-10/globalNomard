@@ -28,7 +28,7 @@ const request = async ({
       },
     };
     if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `${token}`;
     }
     let data: AxiosResponse;
     if (method === 'get') {

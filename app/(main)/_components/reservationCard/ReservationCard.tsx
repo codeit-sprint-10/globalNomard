@@ -1,5 +1,6 @@
 import Text, { TextType } from '@/_styles/Text';
 import * as S from './reservationCard.style';
+import { Reservation } from '@/_api/reservation/reservation.types';
 
 function getStatusText(status: string) {
   switch (status) {
@@ -17,21 +18,30 @@ function getStatusText(status: string) {
       return '';
   }
 }
+interface Props {
+  data: Reservation;
+}
 
-export default function ReservationCard({ data }: { data: any }) {
-  const status = data.reservations[0].status;
-  const banner = data.reservations[0].activity.bannerImageUrl;
-
+export default function ReservationCard({ data }: Props) {
   return (
     <S.Container>
-      <S.ThumbImage src={banner} alt="체험 썸네일" />
+      <S.ThumbImage src={data?.activity?.bannerImageUrl} alt="체험 썸네일" />
       <S.ContentContainer>
-        <S.Status status={status}>
+        <S.Status status={data?.status}>
           <Text $normalType={TextType.Pre10} text={getStatusText(status)} />
         </S.Status>
-        <S.Title />
-        <S.StartTime />
-        <S.TotalPrice />
+        <S.Title>
+          <Text $normalType={TextType.Pre9} text={data?.activity?.title} />
+        </S.Title>
+        <S.DateTimeHead>
+          {<Text $normalType={TextType.Pre29} text={data?.date} />} ·
+          {<Text $normalType={TextType.Pre29} text={data?.startTime} />} -
+          {<Text $normalType={TextType.Pre29} text={data?.endTime} />} ·
+          {<Text $normalType={TextType.Pre29} text={data?.headCount} />}
+        </S.DateTimeHead>
+        <S.TotalPrice>
+          <Text $normalType={TextType.Pre9} text={data?.totalPrice} />
+        </S.TotalPrice>
       </S.ContentContainer>
     </S.Container>
   );
