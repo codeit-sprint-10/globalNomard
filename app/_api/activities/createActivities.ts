@@ -1,4 +1,3 @@
-import { BASE_URL } from '@/_styles/constants';
 import axios from 'axios';
 import { Activities } from './activities.types';
 
