@@ -1,16 +1,37 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
-import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
+import { postUser } from '@/_api/postUser';
+import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
+import { useUserinfo } from '@/_hooks/useUserinfo';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import Input from '../../_components/input/Input';
 
-function Page() {
+function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
+  const router = useRouter();
+  const { setUserinfo, userInfo } = useUserinfo();
+
+  const User = async (data: any) => {
+    try {
+      const { email, password } = data;
+      const res = await postUser({ email, password });
+      setUserinfo(res?.user, res.accessToken);
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    User(data);
   });
+
+  useEffect(() => {
+    console.log({ userInfo });
+  }, [userInfo]);
 
   return (
     <S.Wrapper>
@@ -32,7 +53,12 @@ function Page() {
           rules={{ required: 'This field is required' }}
         />
       </S.Form>
-      <PlainButton style="primary" height="4.8rem" roundSize="M">
+      <PlainButton
+        onClick={onSubmit}
+        style="primary"
+        height="4.8rem"
+        roundSize="M"
+      >
         로그인 하기
       </PlainButton>
       <S.Info>
@@ -42,4 +68,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Signin;
