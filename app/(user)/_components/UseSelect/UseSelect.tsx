@@ -14,7 +14,7 @@ const options = [
   { value: '관광', name: '관광' },
 ];
 
-function UseSelect({ name, control, ...rest }: Props) {
+function UseSelect({ name, control }: Props) {
   const { field, fieldState } = useController({
     name,
     control,

@@ -7,7 +7,6 @@ import SideMenu from '../_components/SideMenu/SideMenu';
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
       <SectionLayout>
         <SideMenu />
         {children}
