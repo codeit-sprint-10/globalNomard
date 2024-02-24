@@ -7,10 +7,15 @@ import Pagenation from '@/_components/Pagenation/Pagenation';
 import Banner from '../_components/banner/Banner';
 import IMAGES from '@/public/images';
 import { getActivityList } from '@/_api/getActivityList';
-import { CategoryType, Data, HandleCategoryClick } from '../_components/type';
+import {
+  Activity,
+  CategoryType,
+  Data,
+  HandleCategoryClick,
+} from '../_components/type';
 
 export default function Main() {
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
   const [category, setCategory] = useState<CategoryType>('전체');
 
   const handleCategoryClick: HandleCategoryClick = (selectedCategory) => {
@@ -29,6 +34,7 @@ export default function Main() {
 
   const fetchActivityList = async (category: CategoryType) => {
     const result = await getActivityList(category);
+    console.log(result);
     setActivities(result.activities);
   };
 

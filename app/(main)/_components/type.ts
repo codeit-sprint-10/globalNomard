@@ -22,6 +22,14 @@ export interface Activity {
   price: string;
   rating: number;
   reviewCount: number;
+
+  userId?: number;
+  description?: string;
+  category?: string;
+  address?: string;
+  bannerImageUrl?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Activities {
