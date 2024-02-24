@@ -1,4 +1,4 @@
-import { POST } from './api';
+import fetcher from './api';
 
 interface Props {
   email: string;
@@ -14,6 +14,6 @@ export const postNewUser = async ({ email, nickname, password }: Props) => {
   };
   console.log(body);
 
-  const { data } = await POST(`/users`, body);
+  const { data } = await fetcher({ url: '/users', method: 'POST', data: body });
   return data;
 };

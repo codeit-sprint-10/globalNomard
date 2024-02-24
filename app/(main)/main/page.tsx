@@ -6,11 +6,17 @@ import CategoryList from '../_components/categoryList/CategoryList';
 import Pagenation from '@/_components/Pagenation/Pagenation';
 import Banner from '../_components/banner/Banner';
 import IMAGES from '@/public/images';
-import { Data } from '../_components/type';
 import { getActivityList } from '@/_api/getActivityList';
+import { CategoryType, Data, HandleCategoryClick } from '../_components/type';
 
 export default function Main() {
   const [activities, setActivities] = useState([]);
+  const [category, setCategory] = useState<CategoryType>('전체');
+
+  const handleCategoryClick: HandleCategoryClick = (selectedCategory) => {
+    setCategory(selectedCategory);
+  };
+
   const banner: Data[] = [
     {
       id: 1,
@@ -21,21 +27,20 @@ export default function Main() {
     },
   ];
 
-  const fetchActivityList = async () => {
-    const result = await getActivityList();
-    console.log(result.activities);
+  const fetchActivityList = async (category: CategoryType) => {
+    const result = await getActivityList(category);
     setActivities(result.activities);
   };
 
   useEffect(() => {
-    fetchActivityList();
-  });
+    fetchActivityList(category);
+  }, [category]);
 
   return (
     <>
       <Banner datas={banner} />
       <CardList data={activities} />
-      <CategoryList />
+      <CategoryList seleted={category} onClick={handleCategoryClick} />
       <SmallCardList data={activities} />
       <Pagenation />
     </>
