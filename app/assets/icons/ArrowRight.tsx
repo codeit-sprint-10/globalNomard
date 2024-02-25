@@ -23,15 +23,15 @@ function ArrowRight() {
             height="275"
             rx="4.5"
             stroke="#9747FF"
-            stroke-dasharray="10 5"
+            strokeDasharray="10 5"
           />
           <g id="Property 1=Variant4">
             <path
               id="Vector 668"
               d="M16 11L26.2929 21.2929C26.6834 21.6834 26.6834 22.3166 26.2929 22.7071L16 33"
               stroke="#4B4B4B"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             />
           </g>
         </g>

@@ -30,8 +30,8 @@ function ArrowLeft() {
               id="Vector 668"
               d="M27 11L16.7071 21.2929C16.3166 21.6834 16.3166 22.3166 16.7071 22.7071L27 33"
               stroke="#4B4B4B"
-              stroke-width="3"
-              stroke-linecap="round"
+              strokeWidth="3"
+              strokeLinecap="round"
             />
           </g>
         </g>

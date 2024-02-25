@@ -3,7 +3,7 @@ import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
 interface UserInfoState {
   userInfo: User;
-  accessToken: string | null;
+  accessToken?: string;
   setUserinfo: (user: User, accessToken: string) => void;
 }
 
@@ -21,7 +21,7 @@ export const useUserinfo = create<UserInfoState>()(
     persist(
       (set) => ({
         userInfo: {} as User,
-        accessToken: null as string | null,
+        accessToken: '',
         setUserinfo: (userInfo: User, accessToken: string) => {
           set({
             userInfo: userInfo,
