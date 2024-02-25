@@ -3,22 +3,28 @@
 import * as S from '@/(auth)/sign.style';
 import { postUser } from '@/_api/postUser';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
-import { useUserinfo } from '@/_hooks/useUserinfo';
+import { useToken, useUserinfo } from '@/_hooks/useUserinfo';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../_components/input/Input';
+import ReservationCardList from '@/(main)/_components/reservationCard/ReservationCardList/ReservationCardList';
 
 function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
   const router = useRouter();
-  const { setUserinfo, userInfo } = useUserinfo();
+  const { setUserinfo } = useUserinfo();
+  const { setAccessToken } = useToken();
 
   const User = async (data: any) => {
     try {
       const { email, password } = data;
       const res = await postUser({ email, password });
-      setUserinfo(res?.user, res.accessToken);
+      setUserinfo(res?.user);
+      localStorage.setItem('userInfo', res?.user);
+
+      setAccessToken(res?.accessToken);
+      localStorage.setItem('accessToken', res?.accessToken);
+
       router.push('/');
     } catch (error) {
       console.log(error);
@@ -29,12 +35,9 @@ function Signin() {
     User(data);
   });
 
-  useEffect(() => {
-    console.log({ userInfo });
-  }, [userInfo]);
-
   return (
     <S.Wrapper>
+      <ReservationCardList />
       <S.Form onSubmit={onSubmit}>
         <Input
           title="이메일"

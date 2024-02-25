@@ -639,7 +639,7 @@ interface Props {
     weight?: string;
     height?: string;
   };
-  text?: string;
+  text?: string | number;
 }
 
 export const Text = ({ $normalType, $mobileType, text }: Props) => {
