@@ -17,14 +17,6 @@ interface props {
 function GoodsDate({ start, end }: props) {
   const [headCount, setHeadCount] = useState(1);
 
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(null);
-  // const onChange = (dates: any) => {
-  //   const [start, end] = dates;
-  //   setStartDate(start);
-  //   setEndDate(end);
-  // };
-
   const AddCount = () => {
     setHeadCount(headCount + 1);
   };
