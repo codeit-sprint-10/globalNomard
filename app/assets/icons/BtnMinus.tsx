@@ -22,8 +22,8 @@ function BtnMinus() {
           id="Vector 660"
           d="M15 28H41.5"
           stroke="#79747E"
-          stroke-width="3"
-          stroke-linecap="round"
+          strokeWidth="3"
+          strokeLinecap="round"
         />
       </g>
     </svg>
