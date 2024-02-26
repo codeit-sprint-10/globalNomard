@@ -8,11 +8,43 @@ export const Wrapper = styled.div`
 
   width: 80rem;
   padding: 2.1rem 2.4rem;
+
+  border-radius: 1rem;
+  box-shadow: 1px 2px 6px 0px #00000040;
 `;
 
 export const Header = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 2.2rem;
+`;
+
+export const Item = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+`;
+
+export const Blue = styled.div`
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: #0085ff;
+`;
+
+export const Beige = styled.div`
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: #fff4e8;
+`;
+
+export const Gray = styled.div`
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: #ddd;
 `;
 
 export const Info = styled.div`
@@ -49,4 +81,18 @@ export const ListCard = styled.div`
   padding: 1.4rem 3.2rem;
   border: 1px solid ${COLORS.GRAY30};
   border-radius: 4px;
+`;
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  width: 15rem;
 `;
