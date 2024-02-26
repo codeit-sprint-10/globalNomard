@@ -2,21 +2,22 @@ import React from 'react';
 import * as S from './card.style';
 import Star from '@/assets/icons/Star.svg';
 import Text, { TextType } from '@/_styles/Text';
-import { Data } from '../type';
+import { Activity } from '../type';
 
-interface Activity {
-  data: Data;
+interface Activities {
+  data: Activity;
 }
 
-export default function Card({ data }: Activity) {
-  const { images, title, price, point } = data;
+export default function Card({ data }: Activities) {
+  const { images, title, price, rating, reviewCount } = data;
   return (
     <S.Container>
       <S.Background src={images} alt="image" />
       <S.Wrapper>
         <S.Point>
           <Star />
-          <Text $normalType={TextType.Pre12} text={point} />
+          <S.Rate>{rating}</S.Rate>
+          <S.ReviewCount>({reviewCount})</S.ReviewCount>
         </S.Point>
         <S.Title>
           <Text $normalType={TextType.Pre13} text={title} />

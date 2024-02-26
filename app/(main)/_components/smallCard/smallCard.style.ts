@@ -22,6 +22,33 @@ export const Info = styled.div`
   gap: 1.5rem;
 `;
 
+export const RatingWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+`;
+
+export const Rate = styled.div`
+  color: var(--black-90, #1b1b1b);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+`;
+
+export const ReviewCount = styled.div`
+  color: var(--gray-55, #a1a1a1);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+`;
+
 export const Price = styled.div`
   display: flex;
   flex-direction: row;

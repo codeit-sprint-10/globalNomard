@@ -1,11 +1,14 @@
+import { CategoryType } from '@/(main)/_components/type';
+
 interface Data {
   id: number;
-  text: string;
+  text: CategoryType;
 }
 
 type Dummy = Data[];
 
 const categoryDummy: Dummy = [
+  { id: 0, text: '전체' },
   { id: 1, text: '문화 · 예술' },
   { id: 2, text: '식음료' },
   { id: 3, text: '스포츠' },

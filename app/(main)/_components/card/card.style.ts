@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import Image from 'next/image';
 import COLORS from '@/_styles/colors';
@@ -44,6 +43,24 @@ export const Point = styled.div`
   gap: 5px;
   align-items: center;
   color: ${COLORS.WHITE10};
+`;
+
+export const Rate = styled.div`
+  color: var(--black-90, #1b1b1b);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+export const ReviewCount = styled.div`
+  color: var(--gray-55, #a1a1a1);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;
 
 export const Title = styled.div`

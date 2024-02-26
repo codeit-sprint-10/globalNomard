@@ -1,15 +1,27 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardList from '../_components/cardList/CardList';
-import activityDummy from '@/_constants/activityDummy';
 import SmallCardList from '../_components/smallCardList/SmallCardList';
 import CategoryList from '../_components/categoryList/CategoryList';
 import Pagenation from '@/_components/Pagenation/Pagenation';
 import Banner from '../_components/banner/Banner';
 import IMAGES from '@/public/images';
-import { Data } from '../_components/type';
+import { getActivityList } from '@/_api/getActivityList';
+import {
+  Activity,
+  CategoryType,
+  Data,
+  HandleCategoryClick,
+} from '../_components/type';
 
 export default function Main() {
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [category, setCategory] = useState<CategoryType>('전체');
+
+  const handleCategoryClick: HandleCategoryClick = (selectedCategory) => {
+    setCategory(selectedCategory);
+  };
+
   const banner: Data[] = [
     {
       id: 1,
@@ -19,13 +31,24 @@ export default function Main() {
       point: '4.9 (793)',
     },
   ];
+
+  const fetchActivityList = async (category: CategoryType) => {
+    const result = await getActivityList(category);
+    console.log(result);
+    setActivities(result.activities);
+  };
+
+  useEffect(() => {
+    fetchActivityList(category);
+  }, [category]);
+
   return (
-    <div>
+    <>
       <Banner datas={banner} />
-      <CardList data={activityDummy} />
-      <CategoryList />
-      <SmallCardList data={activityDummy} />
+      <CardList data={activities} />
+      <CategoryList seleted={category} onClick={handleCategoryClick} />
+      <SmallCardList data={activities} />
       <Pagenation />
-    </div>
+    </>
   );
 }

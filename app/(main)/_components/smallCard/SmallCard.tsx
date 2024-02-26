@@ -1,20 +1,23 @@
 import React from 'react';
 import * as S from './smallCard.style';
-import { Data } from '../type';
+import { Activity } from '../type';
 import Text, { TextType } from '@/_styles/Text';
 
-interface Activity {
-  data: Data;
+interface Activities {
+  data: Activity;
 }
 
-export default function SmallCard({ data }: Activity) {
-  const { images, title, price, point } = data;
+export default function SmallCard({ data }: Activities) {
+  const { images, title, price, rating, reviewCount } = data;
 
   return (
     <S.Wrapper>
       <S.Card src={images} alt="images" />
       <S.Info>
-        <Text $normalType={TextType.Pre6} text={`⭐️ ${point}`} />
+        <S.RatingWrapper>
+          <S.Rate>⭐️ {rating}</S.Rate>
+          <S.ReviewCount>({reviewCount})</S.ReviewCount>
+        </S.RatingWrapper>
         <Text $normalType={TextType.Pre18} text={title} />
         <S.Price>
           <Text $normalType={TextType.Pre19} text={`₩ ${price} 원`} />
