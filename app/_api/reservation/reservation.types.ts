@@ -26,3 +26,8 @@ export interface Activity {
   title: string;
   id: number;
 }
+
+export interface ReservationSort {
+  sort: 'pending' | 'canceled' | 'confirmed' | 'declined' | 'completed';
+  text: string;
+}

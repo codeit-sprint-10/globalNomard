@@ -1,21 +1,8 @@
-import { getReservations } from '@/_api/reservation/getReservations';
 import { ReservationData } from '@/_api/reservation/reservation.types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReservationCard from '../ReservationCard';
 
-function ReservationCardList() {
-  const [data, setData] = useState<ReservationData | undefined>();
-
-  const getData = async () => {
-    const res = await getReservations();
-    setData(res);
-  };
-  // state
-  // ReservationCard
-  useEffect(() => {
-    getData();
-  }, []);
-
+function ReservationCardList({ data }: { data?: ReservationData }) {
   return (
     <div>
       {data?.reservations?.map((item) => (

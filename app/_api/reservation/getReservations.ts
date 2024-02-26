@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReservationData } from './reservation.types';
+import { ReservationData, ReservationSort } from './reservation.types';
 import fetcher, { BASE_URL } from '../api';
 
-export const getReservations = async (): Promise<
-  ReservationData | undefined
-> => {
+export const getReservations = async (
+  status?: ReservationSort['sort'],
+): Promise<ReservationData | undefined> => {
   try {
     // const accessToken = localStorage.getItem('accessToken');
     // console.log({ accessToken });
@@ -16,6 +16,7 @@ export const getReservations = async (): Promise<
     const response = await fetcher<ReservationData, void>({
       url: `${BASE_URL}/my-reservations`,
       method: 'GET',
+      params: { status },
     });
     console.log(response.data);
     return response?.data;
