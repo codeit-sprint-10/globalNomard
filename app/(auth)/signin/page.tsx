@@ -1,25 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
-import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
-import { useForm } from 'react-hook-form';
 import { postUser } from '@/_api/postUser';
+import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
+import { useToken, useUserinfo } from '@/_hooks/useUserinfo';
 import { useRouter } from 'next/navigation';
-import { useUserinfo } from '@/_hooks/useUserinfo';
+import { useForm } from 'react-hook-form';
+import Input from '../../_components/input/Input';
 
 function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
   const router = useRouter();
   const { setUserinfo } = useUserinfo();
+  const { setAccessToken } = useToken();
 
   const User = async (data: any) => {
     try {
       const { email, password } = data;
       const res = await postUser({ email, password });
-      console.log(res);
-      setUserinfo({}, res.accessToken, res.refreshToken);
-      router.push('/home');
+      setUserinfo(res?.user);
+      setAccessToken(res?.accessToken);
+
+      localStorage.setItem('accessToken', res?.accessToken);
+
+      router.push('/');
     } catch (error) {
       console.log(error);
     }

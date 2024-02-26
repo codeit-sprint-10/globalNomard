@@ -18,7 +18,8 @@ export interface Activities {
 }
 
 export interface Schedule {
-  times: Time[];
+  startTime: string;
+  endTime: string;
   date: string;
 }
 

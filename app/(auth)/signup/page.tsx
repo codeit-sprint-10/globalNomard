@@ -1,13 +1,12 @@
 'use client';
-import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
-import Input from '../../_components/input/Input';
 import * as S from '@/(auth)/sign.style';
-import { useForm } from 'react-hook-form';
 import { postNewUser } from '@/_api/postNewUser';
+import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
+import { useForm } from 'react-hook-form';
+import Input from '../../_components/input/Input';
 
 function Signup() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
-  const [token, setToken] = useState<string>('');
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const newUser = async (data: any) => {

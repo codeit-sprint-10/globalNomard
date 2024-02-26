@@ -1,18 +1,17 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
+
+type Token = string | null;
 
 interface UserInfoState {
   userInfo: User;
-  accessToken: string | null;
-  refreshToken: string | null;
-  setUserinfo: (user: User, accessToken: string, refreshToken: string) => void;
+  setUserinfo: (user: User) => void;
 }
 
-// export interface UserInfoResponse {
-//   accessToken: string;
-//   refreshToken: string;
-//   user: User;
-// }
+interface TokenState {
+  accessToken: Token;
+  setAccessToken: (accessToken: string) => void;
+}
 
 export interface User {
   id: number;
@@ -24,26 +23,23 @@ export interface User {
 }
 
 export const useUserinfo = create<UserInfoState>()(
-  persist(
-    (set) => ({
-      userInfo: {} as User,
-      accessToken: null as string | null,
-      refreshToken: null as string | null,
-      setUserinfo: (
-        userInfo: User,
-        accessToken: string,
-        refreshToken: string,
-      ) => {
-        set({
-          userInfo: userInfo,
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        });
-      },
-    }),
-    {
-      name: 'userInfo-storage',
-      storage: createJSONStorage(() => localStorage),
+  devtools((set) => ({
+    userInfo: {} as User,
+    setUserinfo: (userInfo: User) => {
+      set({
+        userInfo: userInfo,
+      });
     },
-  ),
+  })),
+);
+
+export const useToken = create<TokenState>()(
+  devtools((set) => ({
+    accessToken: null as Token,
+    setAccessToken: (accessToken: string) => {
+      set({
+        accessToken: accessToken,
+      });
+    },
+  })),
 );

@@ -6,13 +6,25 @@ interface Props {
   password: string;
 }
 
+// export const postNewUser = async ({ email, nickname, password }: Props) => {
+//   const body = {
+//     email,
+//     nickname,
+//     password,
+//   };
+//   console.log(body);
+
+//   const { data } = await POST(`/users`, body);
+//   return data;
+// };
+
 export const postNewUser = async ({ email, nickname, password }: Props) => {
   const body = {
     email,
     nickname,
     password,
   };
-  console.log(body);
+  console.log(body, 'postNewUser 테스트');
 
   const { data } = await fetcher({ url: '/users', method: 'POST', data: body });
   return data;

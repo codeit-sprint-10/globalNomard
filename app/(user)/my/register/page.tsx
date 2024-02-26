@@ -1,18 +1,20 @@
 'use client';
 
-import styled from 'styled-components';
-import { Text, TextType } from '@/_styles/Text';
-import Button from '@/_components/Button/Button';
-import { RESPONSIBLE_SIZE } from '@/_styles/constants';
-import { useForm } from 'react-hook-form';
+import DatePick, { DateType } from '@/(user)/_components/DatePick/DatePick';
+import Upload from '@/(user)/_components/Upload/Upload';
 import UseInput from '@/(user)/_components/UseInput/UseInput';
 import UseSelect from '@/(user)/_components/UseSelect/UseSelect';
-import DatePick, { DateType } from '@/(user)/_components/DatePick/DatePick';
-import { useState } from 'react';
+import { Schedule } from '@/_api/activities/activities.types';
+import { createActivities } from '@/_api/activities/createActivities';
+import { AddButton } from '@/_components/Button/AddButton/AddButton';
+import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
+import { Text, TextType } from '@/_styles/Text';
 import COLORS from '@/_styles/colors';
-import Upload from '@/(user)/_components/Upload/Upload';
-import { Activities, Schedule } from '@/_api/activities/activities.types';
-import { CreateActivities } from '@/_api/activities/createActivities';
+import { RESPONSIBLE_SIZE } from '@/_styles/constants';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
 
 export type FormValues = {
   title: string;
@@ -26,6 +28,7 @@ function Page() {
   //datePicker value state 초기값 빈배열
   const [reservation, setReservation] = useState<Schedule[]>([]);
   const [bannerImg, setBannerImg] = useState<string>('');
+  const [imgResult, setImgResult] = useState<string | ArrayBuffer | null>(null);
 
   const { control, handleSubmit, formState } = useForm<FormValues>({
     mode: 'onChange',
@@ -35,18 +38,18 @@ function Page() {
     //DatePicker 데이터를 가져옴
     //API를 연결하여 데이터 전송
     const { category, description, price, title } = data;
+    const bannerImageUrl = imgResult;
 
-    const reqBody: Activities = {
+    const reqBody = {
       title,
       category: category || '',
       description,
-      price,
+      price: Number(price),
       address: '서울특별시 강남구 테헤란로 427',
       schedules: reservation,
-      bannerImageUrl: bannerImg || '',
+      bannerImageUrl,
     };
-    console.log(reqBody);
-    await CreateActivities(reqBody);
+    await createActivities(reqBody);
   };
 
   const onRemove = (date: string) => {
@@ -56,20 +59,13 @@ function Page() {
   };
 
   const handleDatePickSubmit = (data: DateType) => {
-    const year = data.date?.getFullYear().toString();
-    const month = data.date?.getMonth().toString();
-    const date = data.date?.getDate().toString();
+    const dateValue = dayjs(data.date).format('YYYY-MM-DD');
 
-    const dateValue = `${year}-${month}-${date}`;
     const startTime = data.startTime?.toString().substring(16, 21);
     const endTime = data.endTime?.toString().substring(16, 21);
-    const dates: Schedule = {
-      times: [
-        {
-          startTime: startTime || '',
-          endTime: endTime || '',
-        },
-      ],
+    const dates = {
+      startTime: startTime || '',
+      endTime: endTime || '',
       date: dateValue,
     };
 
@@ -82,6 +78,13 @@ function Page() {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
       setBannerImg(imageUrl);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        const base64Data = reader.result;
+        setImgResult(base64Data);
+      };
     }
   };
 
@@ -90,7 +93,7 @@ function Page() {
       <Wrapper>
         <PageHeader>
           <Text $normalType={TextType.Pre22} text="내 체험 등록" />
-          <Button.Plain
+          <PlainButton
             style="primary"
             roundSize="S"
             width="12rem"
@@ -99,7 +102,7 @@ function Page() {
             isNotActive={formState.isValid ? false : true}
           >
             <Text $normalType={TextType.Pre10} text="수정하기" />
-          </Button.Plain>
+          </PlainButton>
         </PageHeader>
         <UseInput
           type="text"
@@ -124,18 +127,18 @@ function Page() {
         <Text $normalType={TextType.Pre8} text="예약 가능한 시간대" />
         <DatePick onClick={handleDatePickSubmit} />
         {reservation &&
-          reservation.map(({ times, date }, idx) => (
-            <ReservationContainer>
+          reservation.map(({ startTime, endTime, date }, idx) => (
+            <ReservationContainer key={idx}>
               <ReservationDate>{date}</ReservationDate>
               <TimeContainer>
-                <ReservationTime>{times?.[idx]?.startTime}</ReservationTime>
-                <ReservationTime>{times?.[idx]?.endTime}</ReservationTime>
+                <ReservationTime>{startTime}</ReservationTime>
+                <ReservationTime>{endTime}</ReservationTime>
               </TimeContainer>
-              <Button.Add
+              <AddButton
                 style="minus"
                 type="button"
                 onClick={() => onRemove(date)}
-              ></Button.Add>
+              ></AddButton>
             </ReservationContainer>
           ))}
         <Text $normalType={TextType.Pre8} text="배너 이미지" />
@@ -153,7 +156,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 24px;
   padding: 0.8rem;
-  border: 1px solid black;
 
   @media screen and (max-width: ${RESPONSIBLE_SIZE.tablet}) {
     width: 42.9rem;

@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { styled } from 'styled-components';
 import { ko } from 'date-fns/esm/locale'; //한국어 설정
 import COLORS from '@/_styles/colors';
-import Button from '@/_components/Button/Button';
+import { AddButton } from '@/_components/Button/AddButton/AddButton';
 
 interface Props {
   onClick: (data: DateType) => void;
@@ -94,11 +94,7 @@ function DatePick({ onClick }: Props) {
           </FlexBox>
         </TimeContainer>
         <FlexBox>
-          <Button.Add
-            style="plus"
-            type="button"
-            onClick={() => onClick(date)}
-          />
+          <AddButton style="plus" type="button" onClick={() => onClick(date)} />
         </FlexBox>
       </Container>
     </Wrapper>

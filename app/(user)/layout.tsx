@@ -6,9 +6,9 @@ export default function UserLayout({ children }: { children: ReactNode }) {
   return (
     <div>
       <GNBNav userType="profile" />
-      <Footer />
       {/* (user) 레이아웃 */}
       {children}
+      <Footer />
     </div>
   );
 }
