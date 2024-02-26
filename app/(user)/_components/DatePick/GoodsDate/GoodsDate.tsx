@@ -1,6 +1,6 @@
 import Add from '@/assets/icons/Add';
 import Subtract from '@/assets/icons/Subtract';
-import { Schedule } from '@/_api/goods/goods.types';
+import { Schedule } from '@/_api/activity/activity.types';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
 import COLORS from '@/_styles/colors';
 import Text, { TextType } from '@/_styles/Text';
@@ -10,20 +10,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { styled } from 'styled-components';
 
 interface props {
-  start: Schedule;
-  end: Schedule;
+  start: string;
+  end: string;
 }
 
 function GoodsDate({ start, end }: props) {
   const [headCount, setHeadCount] = useState(1);
-
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(null);
-  // const onChange = (dates: any) => {
-  //   const [start, end] = dates;
-  //   setStartDate(start);
-  //   setEndDate(end);
-  // };
 
   const AddCount = () => {
     setHeadCount(headCount + 1);
@@ -46,8 +38,8 @@ function GoodsDate({ start, end }: props) {
       <Reservation>
         <Text $normalType={TextType.Pre25} text="예약 가능한 시간" />
         <ReservationTime>
-          <StartDate>{`${start.startTime} ~ ${start.endTime}`}</StartDate>
-          <EndDate>{`${end.startTime} ~ ${end.endTime}`}</EndDate>
+          <StartDate>{`${start} ~ ${end}`}</StartDate>
+          <EndDate>{`${start} ~ ${end}`}</EndDate>
         </ReservationTime>
       </Reservation>
       <NumberOfPeople>

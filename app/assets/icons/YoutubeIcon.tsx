@@ -7,7 +7,7 @@ const FacebookLogo = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="akar-icons:youtube-fill" clip-path="url(#clip0_138_5690)">
+      <g id="akar-icons:youtube-fill" clipPath="url(#clip0_138_5690)">
         <g id="Group">
           <g id="Group_2">
             <path

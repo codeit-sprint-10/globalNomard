@@ -11,14 +11,14 @@ function BtnPlus() {
       <path
         d="M15 28H41.5"
         stroke="white"
-        stroke-width="3"
-        stroke-linecap="round"
+        strokeWidth="3"
+        strokeLinecap="round"
       />
       <path
         d="M28 15L28 41.5"
         stroke="white"
-        stroke-width="3"
-        stroke-linecap="round"
+        strokeWidth="3"
+        strokeLinecap="round"
       />
     </svg>
   );
