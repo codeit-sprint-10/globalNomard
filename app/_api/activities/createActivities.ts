@@ -1,21 +1,17 @@
-import axios from 'axios';
-import { Activities } from './activities.types';
+import fetcher from '../api';
 
 /**
  *  내 체험 등록하기
  */
-export const CreateActivities = async (data: Activities) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createActivities = async (data: any) => {
   try {
-    const response = await axios.post(
-      'https://sp-globalnomad-api.vercel.app/1-10/activities',
+    await fetcher({
+      url: '/activities',
+      method: 'POST',
       data,
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (error: any) {
-    console.log(error.response);
-    return error.response;
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
-
-//https://sp-globalnomad-api.vercel.app/1-10/activities

@@ -11,6 +11,7 @@ export const Container = styled.div`
   flex-direction: row;
   border-radius: 24px;
   background: ${COLORS.WHITE10};
+  box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
 `;
 
 export const ThumbImage = styled(Image)`

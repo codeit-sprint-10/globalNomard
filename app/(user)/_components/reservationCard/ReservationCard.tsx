@@ -28,7 +28,10 @@ export default function ReservationCard({ data }: Props) {
       <S.ThumbImage src={data?.activity?.bannerImageUrl} alt="체험 썸네일" />
       <S.ContentContainer>
         <S.Status status={data?.status}>
-          <Text $normalType={TextType.Pre10} text={getStatusText(status)} />
+          <Text
+            $normalType={TextType.Pre10}
+            text={getStatusText(data?.status)}
+          />
         </S.Status>
         <S.Title>
           <Text $normalType={TextType.Pre9} text={data?.activity?.title} />
@@ -37,10 +40,10 @@ export default function ReservationCard({ data }: Props) {
           {<Text $normalType={TextType.Pre29} text={data?.date} />} ·
           {<Text $normalType={TextType.Pre29} text={data?.startTime} />} -
           {<Text $normalType={TextType.Pre29} text={data?.endTime} />} ·
-          {<Text $normalType={TextType.Pre29} text={data?.headCount} />}
+          {<Text $normalType={TextType.Pre29} text={data?.headCount} />}명
         </S.DateTimeHead>
         <S.TotalPrice>
-          <Text $normalType={TextType.Pre9} text={data?.totalPrice} />
+          ₩<Text $normalType={TextType.Pre9} text={data?.totalPrice} />
         </S.TotalPrice>
       </S.ContentContainer>
     </S.Container>

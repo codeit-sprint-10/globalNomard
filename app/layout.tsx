@@ -22,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          루트 레이아웃
           <ResetStyles />
           <GlobalStyles />
           <FontStyles />

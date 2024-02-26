@@ -7,21 +7,30 @@ import SideMenu from '../_components/SideMenu/SideMenu';
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <SectionLayout>
-        <SideMenu />
-        {children}
-      </SectionLayout>
+      <Wrapper>
+        <SectionLayout>
+          <SideMenu />
+          {children}
+        </SectionLayout>
+      </Wrapper>
     </>
   );
 }
 
-const Header = styled.header`
-  height: 70px;
-  border: 1px solid black;
+// const Header = styled.header`
+//   height: 70px;
+//   border: 1px solid black;
+// `;
+
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const SectionLayout = styled.section`
   height: 100%;
+  max-width: 80rem;
   display: flex;
   margin: 72px;
   justify-content: center;
