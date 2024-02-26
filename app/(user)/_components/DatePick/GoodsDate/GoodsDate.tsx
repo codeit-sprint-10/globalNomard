@@ -1,6 +1,7 @@
 import Add from '@/assets/icons/Add';
 import Subtract from '@/assets/icons/Subtract';
 import { Schedule } from '@/_api/activity/activity.types';
+import fetcher from '@/_api/api';
 import { PlainButton } from '@/_components/Button/PlainButton/PlainButton';
 import COLORS from '@/_styles/colors';
 import Text, { TextType } from '@/_styles/Text';
@@ -10,11 +11,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { styled } from 'styled-components';
 
 interface props {
+  activityId: string;
+  scheduleId: number;
   start: string;
   end: string;
 }
 
-function GoodsDate({ start, end }: props) {
+function GoodsDate({ activityId, scheduleId, start, end }: props) {
   const [headCount, setHeadCount] = useState(1);
 
   const AddCount = () => {
@@ -26,6 +29,18 @@ function GoodsDate({ start, end }: props) {
       setHeadCount(headCount - 1);
     }
   };
+
+  // click handler
+  const handleClickReservationBtn = async () => {
+    // api call
+    const { data } = await fetcher({
+      url: `/activities/${activityId}/reservations`,
+      method: 'POST',
+      data: { scheduleId, headCount },
+    });
+    console.log({ data });
+  };
+
   return (
     <DatePickContainer>
       <PerToPerson>
@@ -53,7 +68,12 @@ function GoodsDate({ start, end }: props) {
             <Subtract />
           </button>
         </NumberButton>
-        <PlainButton style="primary" roundSize="S" height="56px">
+        <PlainButton
+          style="primary"
+          roundSize="S"
+          height="56px"
+          onClick={handleClickReservationBtn}
+        >
           <Text $normalType={TextType.Pre10} text="예약하기" />
         </PlainButton>
         <TotalCount>

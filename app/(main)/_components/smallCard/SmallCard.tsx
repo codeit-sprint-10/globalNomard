@@ -9,12 +9,17 @@ interface Activities {
 }
 
 export default function SmallCard({ data }: Activities) {
-  const { id, images, title, price, rating, reviewCount } = data;
+  const { id, bannerImageUrl, title, price, rating, reviewCount } = data;
 
   return (
     <Link href={`/goods/${id}`}>
       <S.Wrapper>
-        <S.Card src={images} alt="images" />
+        <S.Card
+          width={283}
+          height={283}
+          src={bannerImageUrl || ''}
+          alt="images"
+        />
         <S.Info>
           <S.RatingWrapper>
             <S.Rate>⭐️ {rating}</S.Rate>

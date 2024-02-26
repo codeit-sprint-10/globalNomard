@@ -10,11 +10,16 @@ interface Activities {
 }
 
 export default function Card({ data }: Activities) {
-  const { id, images, title, price, rating, reviewCount } = data;
+  const { id, bannerImageUrl, title, price, rating, reviewCount } = data;
   return (
     <Link href={`goods/${id}`}>
       <S.Container>
-        <S.Background src={images} alt="image" />
+        <S.Background
+          width={384}
+          height={384}
+          src={bannerImageUrl || ''}
+          alt="image"
+        />
         <S.Wrapper>
           <S.Point>
             <Star />
