@@ -1,6 +1,5 @@
 import fetcher from '../api';
 
-
 /**
  *  내 체험 등록하기
  */

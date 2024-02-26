@@ -7,7 +7,6 @@ import { useToken, useUserinfo } from '@/_hooks/useUserinfo';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import Input from '../../_components/input/Input';
-import ReservationCardList from '@/(main)/_components/reservationCard/ReservationCardList/ReservationCardList';
 
 function Signin() {
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
@@ -20,9 +19,8 @@ function Signin() {
       const { email, password } = data;
       const res = await postUser({ email, password });
       setUserinfo(res?.user);
-      localStorage.setItem('userInfo', res?.user);
-
       setAccessToken(res?.accessToken);
+
       localStorage.setItem('accessToken', res?.accessToken);
 
       router.push('/');
@@ -37,7 +35,6 @@ function Signin() {
 
   return (
     <S.Wrapper>
-      <ReservationCardList />
       <S.Form onSubmit={onSubmit}>
         <Input
           title="이메일"
