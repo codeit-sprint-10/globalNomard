@@ -13,11 +13,11 @@ import { useEffect, useState } from 'react';
 import { ActivityRes } from '@/_api/activity/activity.types';
 
 function Page() {
-  const { id } = useParams<{ id: string }>();
+  const { id: activityId } = useParams<{ id: string }>();
   const [activity, setActivity] = useState<ActivityRes | undefined>();
 
   const getActivityRes = async () => {
-    const data = await getActivity(id);
+    const data = await getActivity(activityId);
     setActivity(data);
   };
 
@@ -47,7 +47,12 @@ function Page() {
           <Description>{activity?.description}</Description>
         </DescriptionSection>
         {activity?.schedules?.map((data) => (
-          <GoodsDate start={data.startTime} end={data.endTime} />
+          <GoodsDate
+            activityId={activityId}
+            scheduleId={activity?.id}
+            start={data.startTime}
+            end={data.endTime}
+          />
         ))}
       </Container>
     </Wrapper>
