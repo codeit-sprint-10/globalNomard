@@ -47,7 +47,8 @@ function Page() {
       price: Number(price),
       address: '서울특별시 강남구 테헤란로 427',
       schedules: reservation,
-      bannerImageUrl,
+      bannerImageUrl:
+        'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/a.png',
     };
     await createActivities(reqBody);
   };
