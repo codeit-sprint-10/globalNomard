@@ -12,7 +12,7 @@ import { styled } from 'styled-components';
 
 interface props {
   activityId: string;
-  scheduleId: number;
+  scheduleId: number | undefined;
   start: string;
   end: string;
 }
@@ -33,6 +33,7 @@ function GoodsDate({ activityId, scheduleId, start, end }: props) {
   // click handler
   const handleClickReservationBtn = async () => {
     // api call
+    console.log(activityId);
     const { data } = await fetcher({
       url: `/activities/${activityId}/reservations`,
       method: 'POST',
