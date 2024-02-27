@@ -1,5 +1,5 @@
 'use client';
-import goodsList from '@/(user)/goods/[id]/mock.json';
+
 import Image from 'next/image';
 import { styled } from 'styled-components';
 import COLORS from '@/_styles/colors';
@@ -11,20 +11,39 @@ import { useParams } from 'next/navigation';
 import { getActivity } from '@/_api/activity/getActivity';
 import { useEffect, useState } from 'react';
 import { ActivityRes } from '@/_api/activity/activity.types';
+import { Schedule } from '@/_api/goods/schedule.types';
 
 function Page() {
   const { id: activityId } = useParams<{ id: string }>();
   const [activity, setActivity] = useState<ActivityRes | undefined>();
+  const [schedule, setSchedule] = useState<Schedule | undefined>();
 
   const getActivityRes = async () => {
     const data = await getActivity(activityId);
     setActivity(data);
   };
 
-  useEffect(() => {
+  const getSchedule = async () => {
     // api call
+    const year = activity?.schedules[0].date.split('-')[0];
+    const month = activity?.schedules[0].date.split('-')[1];
+    const scheduleData = await fetcher({
+      url: `/activities/${activityId}/available-schedule?year=${year}&month=${month}`,
+      method: 'GET',
+    });
+    console.log(scheduleData.data);
+    console.log(scheduleData.data[0]);
+    setSchedule(scheduleData.data[0]);
+  };
+
+  useEffect(() => {
     getActivityRes();
   }, []);
+
+  useEffect(() => {
+    if (!activity) return;
+    getSchedule();
+  }, [activity]);
 
   return (
     <Wrapper>
@@ -49,7 +68,7 @@ function Page() {
         {activity?.schedules?.map((data) => (
           <GoodsDate
             activityId={activityId}
-            scheduleId={activity?.id}
+            scheduleId={schedule?.times?.[0].id}
             start={data.startTime}
             end={data.endTime}
           />
