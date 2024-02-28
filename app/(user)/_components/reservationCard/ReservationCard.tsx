@@ -25,7 +25,12 @@ interface Props {
 export default function ReservationCard({ data }: Props) {
   return (
     <S.Container>
-      <S.ThumbImage src={data?.activity?.bannerImageUrl} alt="체험 썸네일" />
+      <S.ThumbImage
+        src={data?.activity?.bannerImageUrl}
+        alt="체험 썸네일"
+        width={100}
+        height={100}
+      />
       <S.ContentContainer>
         <S.Status status={data?.status}>
           <Text
