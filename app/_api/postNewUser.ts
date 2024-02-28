@@ -24,7 +24,6 @@ export const postNewUser = async ({ email, nickname, password }: Props) => {
     nickname,
     password,
   };
-  console.log(body, 'postNewUser 테스트');
 
   const { data } = await fetcher({ url: '/users', method: 'POST', data: body });
   return data;
