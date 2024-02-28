@@ -13,7 +13,7 @@ function GNBMenuButton({ type, onClick }: Props) {
 
   switch (type) {
     case 'member':
-      link = '/my/memberinfo';
+      link = '/my/reservationList';
       content = '내이름';
       break;
     case 'signOut':
