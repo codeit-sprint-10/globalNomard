@@ -6,7 +6,7 @@ import ProfileMini from '@/public/images/profile_mini.png';
 function ProfileButton() {
   return (
     <S.Wrapper>
-      <Link href="/">
+      <Link href="/my/reservationList">
         <Image src={ProfileMini} alt="ProfileMini" fill />
       </Link>
     </S.Wrapper>

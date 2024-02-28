@@ -13,6 +13,8 @@ import {
   Data,
   HandleCategoryClick,
 } from '@/(main)/_components/type';
+import GNBNav from './(user)/_components/GNBNav/GNBNav';
+import Footer from './(user)/_components/Footer/Footer';
 
 export default function Main() {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -44,11 +46,13 @@ export default function Main() {
 
   return (
     <>
+      <GNBNav userType="member" />
       <Banner datas={banner} />
       <CardList data={activities} />
       <CategoryList seleted={category} onClick={handleCategoryClick} />
       <SmallCardList data={activities} />
       <Pagenation />
+      <Footer />
     </>
   );
 }
