@@ -62,6 +62,7 @@ export const DropDown = styled.div`
   width: 381px;
   height: 56px;
   padding: 0.4rem 0 0.4rem 1.6rem;
+  margin: 2rem 0;
 
   border: 1px solid black;
   border-radius: 4px;
