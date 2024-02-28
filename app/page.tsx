@@ -46,7 +46,7 @@ export default function Main() {
 
   return (
     <>
-      <GNBNav userType="member" />
+      <GNBNav />
       <Banner datas={banner} />
       <CardList data={activities} />
       <CategoryList seleted={category} onClick={handleCategoryClick} />

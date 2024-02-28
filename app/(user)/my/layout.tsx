@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 
 const SectionLayout = styled.section`
   height: 100%;
-  max-width: 80rem;
+  max-width: 120rem;
   display: flex;
   margin: 72px;
   justify-content: center;

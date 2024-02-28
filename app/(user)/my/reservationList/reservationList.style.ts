@@ -1,6 +1,4 @@
-import COLORS from '@/_styles/colors';
 import styled from 'styled-components';
-import Image from 'next/image';
 
 export const Container = styled.div`
   display: flex;
