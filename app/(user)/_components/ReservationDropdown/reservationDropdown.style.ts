@@ -34,6 +34,7 @@ export const DropdownContainer = styled.div`
 export const DropdownButton = styled.button<Props>`
   word-break: keep-all;
   display: flex;
+  width: 16rem;
   padding: 1.6rem 2rem;
   justify-content: space-between;
   align-items: center;
@@ -47,24 +48,24 @@ export const DropdownButton = styled.button<Props>`
 `;
 
 export const DropdownList = styled.ul`
-  display: flex;
-  width: 7.9rem;
+  display: inline-flex;
+  overflow: hidden;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.8rem;
+  align-items: flex-start;
+  border-radius: 0.6rem;
   border: 1px solid ${COLORS.GRAY30};
   background-color: ${COLORS.WHITE10};
   position: absolute;
-  top: 6rem;
-  box-shadow: 0 0.4rem 0.4rem 0 rgba(140, 140, 140, 0.25);
+  top: 7rem;
+  box-shadow: 0 0.4rem 1.6rem 0 rgba(17, 34, 17, 0.05);
 `;
 
-// DropdownItem UI 미완성
 export const DropdownItem = styled.button<{ $isSelected: boolean }>`
   display: flex;
-  border-radius: 0.8rem 0.8rem 0 0;
+  width: 160px;
+  border: 1px solid ${COLORS.GRAY30};
   padding: 1.8rem 4.6rem;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: ${COLORS.WHITE10};

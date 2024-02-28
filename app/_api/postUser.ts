@@ -18,8 +18,6 @@ export const postUser = async ({ email, password }: Props) => {
     password,
   };
 
-  console.log(body, 'postUser 테스트');
-
   const { data } = await fetcher<UserRes, Props>({
     url: '/auth/login',
     method: 'POST',
