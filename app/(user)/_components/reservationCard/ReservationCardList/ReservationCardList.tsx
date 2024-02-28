@@ -1,14 +1,15 @@
 import { ReservationData } from '@/_api/reservation/reservation.types';
 import React from 'react';
 import ReservationCard from '../ReservationCard';
+import * as S from './reservationCardList.style';
 
 function ReservationCardList({ data }: { data?: ReservationData }) {
   return (
-    <div>
+    <S.Wrapper>
       {data?.reservations?.map((item) => (
         <ReservationCard key={item.id} data={item} />
       ))}
-    </div>
+    </S.Wrapper>
   );
 }
 
