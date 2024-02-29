@@ -1,39 +1,25 @@
 'use client';
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './gnbNav.style';
-// import { useEffect, useState } from 'react';
 import GNBMenuButton from '@/(user)/_components/GNBMenuButton/GNBMenuButton';
 import LogoButton from '@/(user)/_components/LogoButton/LogoButton';
 import ProfileButton from '@/(user)/_components/ProfileButton/ProfileButton';
-// import { useUserinfo } from '@/_hooks/useUserinfo';
-
-// interface Props {
-//   userType?: 'member' | undefined;
-// }
-
-const checkAccessToken = () => {
-  const accessToken = localStorage.getItem('accessToken');
-  return accessToken !== null ? 'member' : 'signOut';
-};
 
 function GNBNav() {
-  // const [token, setToken] = useState<string>('');
+  const [isUser, setIsUser] = useState(false);
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     const item = localStorage.getItem('token');
-
-  //     if (item) {
-  //       setToken(item);
-  //     }
-  //   }
-  // }, [userType, token]);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const accessToken = localStorage.getItem('accessToken');
+      setIsUser(!!accessToken);
+    }
+  }, []);
 
   return (
     <S.Wrapper>
       <S.Container>
         <LogoButton />
-        {checkAccessToken() === 'member' ? (
+        {isUser ? (
           <S.MenuWrapper>
             <ProfileButton />
             <GNBMenuButton type="member" />

@@ -15,7 +15,6 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import fetcher from '@/_api/api';
 
 export type FormValues = {
   title: string;
@@ -25,15 +24,11 @@ export type FormValues = {
   bannerImageUrl?: string;
 };
 
-interface ActivityImageUrlRes {
-  activityImageUrl: string;
-}
-
 function Page() {
   //datePicker value state 초기값 빈배열
   const [reservation, setReservation] = useState<Schedule[]>([]);
   const [bannerImg, setBannerImg] = useState<string>('');
-  const [imgResult, setImgResult] = useState<string | Blob>('');
+  const [imgResult, setImgResult] = useState<string | ArrayBuffer | null>(null);
 
   const { control, handleSubmit, formState } = useForm<FormValues>({
     mode: 'onChange',
@@ -43,19 +38,7 @@ function Page() {
     //DatePicker 데이터를 가져옴
     //API를 연결하여 데이터 전송
     const { category, description, price, title } = data;
-
-    const formData = new FormData();
-    formData.append('image', imgResult);
-
-    // 체험 이미지 url 생성
-    const { data: res } = await fetcher<ActivityImageUrlRes, any>({
-      url: '/activities/image',
-      method: 'POST',
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const bannerImageUrl = imgResult;
 
     const reqBody = {
       title,
@@ -64,7 +47,7 @@ function Page() {
       price: Number(price),
       address: '서울특별시 강남구 테헤란로 427',
       schedules: reservation,
-      bannerImageUrl: res?.activityImageUrl,
+      bannerImageUrl,
     };
     await createActivities(reqBody);
   };
@@ -90,14 +73,18 @@ function Page() {
     //state 관리
   };
 
-  const handleFilePickSubmit = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleFilePickSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files !== null) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
       setBannerImg(imageUrl);
-      setImgResult(file);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        const base64Data = reader.result;
+        setImgResult(base64Data);
+      };
     }
   };
 
