@@ -43,3 +43,15 @@ export const Span = styled.span`
   text-decoration: underline;
   cursor: pointer;
 `;
+
+export const ThumbWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 10.4rem;
+  padding-bottom: 0.4rem;
+`;
+
+export const ThumbImage = styled(Image)`
+  width: 34rem;
+  height: 19.2rem;
+`;

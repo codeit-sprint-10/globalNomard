@@ -5,7 +5,7 @@ import GNBNav from './_components/GNBNav/GNBNav';
 export default function UserLayout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <GNBNav userType="profile" />
+      <GNBNav />
       {/* (user) 레이아웃 */}
       {children}
       <Footer />

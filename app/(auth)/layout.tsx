@@ -1,6 +1,8 @@
+'use client';
+
 import { ReactNode } from 'react';
-import IMAGES from '@/public/images';
-import Image from 'next/image';
+import * as S from '@/(auth)/sign.style';
+import logo from '@/public/images/logo.png';
 
 export default function AfterLoginLayout({
   children,
@@ -9,8 +11,9 @@ export default function AfterLoginLayout({
 }) {
   return (
     <div>
-      auth 레이아웃
-      <Image src={IMAGES.logo} alt="logo" />
+      <S.ThumbWrapper>
+        <S.ThumbImage src={logo} alt="logo" width={100} height={100} />
+      </S.ThumbWrapper>
       {children}
     </div>
   );
